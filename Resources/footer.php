@@ -18,9 +18,9 @@
         <h4>EnRolate</h4>
         <h5>Siguenos en nuestras redes sociales</h5>
         <div class="socialMedia">
-            <a href=""><img src="Resources/facebooklogo.png" alt=""></a>
-            <a href=""><img src="Resources/twitterlogo.png" alt=""></a>
-            <a href=""><img src="Resources/instagramlogo.png" alt=""></a>
+            <a href=""><img src="../Resources/facebooklogo.png" alt=""></a>
+            <a href=""><img src="../Resources/twitterlogo.png" alt=""></a>
+            <a href=""><img src="../Resources/instagramlogo.png" alt=""></a>
         </div>
         <ul class="footerList">
             <li class="linksFooter">

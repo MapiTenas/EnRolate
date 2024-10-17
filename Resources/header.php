@@ -1,3 +1,5 @@
+<?php include 'session_start.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +17,21 @@
 <body>
 <header>
     <div class="logo">
-        <img src="Resources/logo.png" alt="Logo web">
+        <img src="../Resources/logo.png" alt="Logo web">
         <h2 class="Nombre web">EnRolate</h2>
     </div>
 
     <nav class="navbar">
-        <a href="">Registrate</a>
-        <a href="">Crea una nueva cuenta</a>
-    </nav>
+        <?php
+        if (isset($_SESSION['username'])) {
+            // El usuario ha iniciado sesión, mostramos el enlace de Cerrar sesión
+            echo '<a href="">Cerrar sesión</a>';
+        } else {
+            // El usuario no ha iniciado sesión, mostramos los enlaces de Registrate y Crea una nueva cuenta
+            echo '<a href="">Login</a>';
+            echo '<a href="../View/formulario_registro.php">Crea una nueva cuenta</a>';
+        }
+        ?>
 </header>
 </body>
 
