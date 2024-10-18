@@ -1,7 +1,7 @@
 <?php
 require_once 'CONNECT-DB.php';
 
-class usuario {
+class Usuario {
     private $id;
     private $nombre_usuario;
     private $email;
@@ -19,7 +19,15 @@ class usuario {
         $this->fecha_registro = $fecha_registro;
     }
 
-    public static function crearUsuario($nombre_usuario, $email, $password, $tipo_usuario, $fecha_registro){
+    public function crearUsuario(){
+        $conexion = getDbConnection();
+        $query = "INSERT INTO users (nombre_usuario, email, password) VALUES (?, ?, ?)";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("sss", $this->nombre_usuario, $this->email, $this->password);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        $conexion->close();
+        return $resultado;
 
     }
 

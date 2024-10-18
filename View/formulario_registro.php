@@ -13,18 +13,18 @@
 <h3>Recuerda loggearte para apuntarte a partidas :)</h3>
 <br>
 <div class="form-container">
-    <form action="" method="post">
+    <form action="../Controller/UsuarioController.php" method="post">
         <div class="form-group">
             <label for="username">Nombre de usuario:</label>
-            <input type="text" id="username" name="username" value="" required>
+            <input type="text" id="nombre_usuario" name="nombre_usuario" required>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="" required>
+            <input type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" value="" required>
+            <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
             <button type="submit" name="submit">Registrar</button>
