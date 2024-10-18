@@ -4,23 +4,46 @@ require_once '../Model/Usuario.php';
 class UsuarioController {
 
     public function crearUsuario($nombre_usuario, $email, $password) {
-        $password_hashed = password_hash(htmlspecialchars($password), PASSWORD_BCRYPT);
+        $conexion = getDbConnection();
+        // Comprobar si el nombre de usuario o el email ya existen
+        $query = "SELECT id FROM users WHERE nombre_usuario = ? OR email = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ss", $nombre_usuario, $email);
+        $stmt->execute();
+        $stmt->store_result();
 
+        // Si ya existe un resultado, devolvemos un error
+        if ($stmt->num_rows > 0) {
+            $stmt->close();
+            $conexion->close();
+            if (isset($_SESSION)) {
+                $_SESSION['register_error'] = "El nombre de usuario o el correo ya están registrados.";
+            }
+            return false;
+        }
+
+        $stmt->close();
+        $conexion->close();
+
+        // Si no hay duplicados, continuamos con la inserción
+        $password_hashed = password_hash(htmlspecialchars($password), PASSWORD_BCRYPT);
         $usuario = new Usuario(null, $nombre_usuario, $email, $password_hashed, null, null);
         return $usuario->crearUsuario();
     }
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    session_start();
     $nombre_usuario = $_POST['nombre_usuario'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     $controller = new UsuarioController();
     if ($controller->crearUsuario($nombre_usuario, $email, $password)) {
-        echo "Usuario registrado con éxito.";
+        header("Location: ../View/index.php");
     } else {
-        echo "Error al registrar el usuario.";
+        header("Location: ../View/formulario_registro.php");
     }
 }
 
