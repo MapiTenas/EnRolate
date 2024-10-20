@@ -1,4 +1,4 @@
-<?php include 'session_start.php';
+<?php include '../Resources/session_start.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EnRolate</title>
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/Resources/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
@@ -23,12 +23,12 @@
 
     <nav class="navbar">
         <?php
-        if (isset($_SESSION['username'])) {
+        if (isset($_SESSION['nombre_usuario'])) {
             // El usuario ha iniciado sesión, mostramos el enlace de Cerrar sesión
-            echo '<a href="">Cerrar sesión</a>';
+            echo '<a href="/Resources/logout.php">Cerrar sesión</a>';
         } else {
             // El usuario no ha iniciado sesión, mostramos los enlaces de Registrate y Crea una nueva cuenta
-            echo '<a href="">Login</a>';
+            echo '<a href="../View/formulario_login.php">Login</a>';
             echo '<a href="../View/formulario_registro.php">Crea una nueva cuenta</a>';
         }
         ?>

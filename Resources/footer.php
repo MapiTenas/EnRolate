@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foro D&D</title>
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/Resources/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
@@ -18,9 +18,9 @@
         <h4>EnRolate</h4>
         <h5>Siguenos en nuestras redes sociales</h5>
         <div class="socialMedia">
-            <a href=""><img src="../Resources/facebooklogo.png" alt=""></a>
-            <a href=""><img src="../Resources/twitterlogo.png" alt=""></a>
-            <a href=""><img src="../Resources/instagramlogo.png" alt=""></a>
+            <a href=""><img src="/Resources/facebooklogo.png" alt=""></a>
+            <a href=""><img src="/Resources/twitterlogo.png" alt=""></a>
+            <a href=""><img src="/Resources/instagramlogo.png" alt=""></a>
         </div>
         <ul class="footerList">
             <li class="linksFooter">
