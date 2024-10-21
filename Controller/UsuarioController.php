@@ -41,9 +41,10 @@ class UsuarioController {
         return $usuario->ascenderUsuario();
     }
 
-
-
-
+    public function degradar($id) {
+        $usuario = new Usuario($id, null, null, null, null, null);
+        return $usuario->degradarUsuario();
+    }
 }
 
 
@@ -67,6 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ascender'])) {
         header("Location: ../View/moderacion_usuarios.php");
     } else {
         echo "Error al ascender al usuario.";
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['degradar'])) {
+    $controller = new UsuarioController();
+    if ($controller->degradar($_POST['id'])) {
+        header("Location: ../View/moderacion_usuarios.php");
+    } else {
+        echo "Error al degradar al usuario.";
     }
 }
 

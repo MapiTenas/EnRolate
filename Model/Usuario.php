@@ -64,6 +64,17 @@ class Usuario {
         return $resultado;
     }
 
+    public function degradarUsuario() {
+        $conexion = getDbConnection();
+        $query = "UPDATE users SET tipo_usuario = 'jugador' WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $this->id);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        $conexion->close();
+        return $resultado;
+    }
+
 
 
 
