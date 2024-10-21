@@ -23,6 +23,9 @@
     <nav class="navbar">
         <?php
         if (isset($_SESSION['nombre_usuario'])) {
+                if ($_SESSION['tipo_usuario'] == 'moderador'){
+                    echo '<a href="../View/moderacion_usuarios.php">Moderación usuarios</a>';
+                }
             // El usuario ha iniciado sesión, mostramos el enlace de Cerrar sesión
             echo '<a href="/Resources/logout.php">Cerrar sesión</a>';
         } else {

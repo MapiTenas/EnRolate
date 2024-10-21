@@ -177,3 +177,42 @@ button:hover {
     z-index: 1000;
     font-size: 16px;
 }
+
+
+/*Css tabla usuarios */
+table {
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+thead th {
+    background-color: #70c068;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #d8ecd8;
+    text-align: center;
+
+}
+
+.btn-ascender {
+    background-color: #8719a4; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: auto;
+}
+
+.btn-ascender:hover {
+    background-color: #c144e5; /* Color de fondo al pasar el ratón */
+}

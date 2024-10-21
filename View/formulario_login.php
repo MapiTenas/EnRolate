@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Foro D&D</title>
+    <title>EnRolate - Login</title>
     <link rel="stylesheet" href="../Resources/styles.css">
 </head>
 

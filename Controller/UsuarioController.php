@@ -30,6 +30,11 @@ class UsuarioController {
         $usuario = new Usuario(null, $nombre_usuario, $email, $password_hashed, null, null);
         return $usuario->crearUsuario();
     }
+
+    // Método para listar usuarios
+    public function listarUsuarios() {
+        return Usuario::obtenerTodosLosUsuarios();
+    }
 }
 
 

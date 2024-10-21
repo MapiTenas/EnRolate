@@ -31,6 +31,29 @@ class Usuario {
 
     }
 
+    public static function obtenerTodosLosUsuarios() {
+        $conexion = getDbConnection();
+        $query = "SELECT id, nombre_usuario, email, tipo_usuario, fecha_registro FROM users";
+        $resultado = $conexion->query($query);
+
+        $usuarios = [];
+
+        while ($fila = $resultado->fetch_assoc()) {
+            $usuarios[] = new Usuario(
+                $fila['id'],
+                $fila['nombre_usuario'],
+                $fila['email'],
+                '',
+                $fila['tipo_usuario'],
+                $fila['fecha_registro']
+            );
+        }
+
+        $conexion->close();
+        return $usuarios;
+    }
+
+
 
     public function getId()
     {

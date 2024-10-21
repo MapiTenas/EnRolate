@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Alta de nuevo usuario</title>
+    <title>EnRolate - Alta de nuevo usuario</title>
     <link rel="stylesheet" href="../Resources/styles.css">
 </head>
 <body>
