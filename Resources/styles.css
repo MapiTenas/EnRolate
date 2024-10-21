@@ -210,8 +210,8 @@ tbody tr:nth-child(even) {
 }
 
 .btn-ascender {
-    background-color: #8719a4; /* Color de fondo */
-    color: white; /* Color del texto */
+    background-color: #8719a4;
+    color: white;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -221,5 +221,19 @@ tbody tr:nth-child(even) {
 }
 
 .btn-ascender:hover {
-    background-color: #c144e5; /* Color de fondo al pasar el ratón */
+    background-color: #c144e5;
+}
+.btn-degradar {
+    background-color: #ee8f1d;
+    color: white; /
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: auto;
+}
+
+.btn-degradar:hover {
+    background-color: #e5a553;
 }

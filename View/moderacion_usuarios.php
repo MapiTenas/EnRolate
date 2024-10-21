@@ -37,7 +37,12 @@ $usuarios = $controller->listarUsuarios();
                     <td><?php echo htmlspecialchars($usuario->getNombreUsuario()); ?></td>
                     <td><?php echo htmlspecialchars($usuario->getTipoUsuario()); ?></td>
                     <td><?php echo htmlspecialchars($usuario->getEmail()); ?></td>
-                    <td><button class="btn-ascender">Ascender</button></td>
+                    <td>
+                        <?php if ($usuario->getTipoUsuario() == 'jugador'): ?>
+                            <button class="btn-ascender">Ascender</button></td>
+                    <?php elseif ($usuario->getTipoUsuario() == 'director'): ?>
+                        <button class="btn-degradar">Degradar</button>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
             </tbody>
