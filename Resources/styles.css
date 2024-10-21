@@ -120,7 +120,7 @@ h1, h2, h3 {
     margin-bottom: 50px;
 }
 
-form {
+.generic-form {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -236,4 +236,9 @@ tbody tr:nth-child(even) {
 
 .btn-degradar:hover {
     background-color: #e5a553;
+}
+.form-ascender {
+    border: none; /* Elimina el borde del formulario */
+    padding: 0; /* Elimina el padding del formulario */
+    margin: 0; /* Elimina el margen del formulario */
 }

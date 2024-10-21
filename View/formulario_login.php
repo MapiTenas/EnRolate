@@ -14,7 +14,7 @@
 <h3>Introduce tus datos</h3>
 <br>
 <div class="form-container">
-    <form action="../Resources/login.php" method="post">
+    <form action="../Resources/login.php" method="post" class="generic-form">
         <div class="form-group">
             <label for="nombre_usuario">Nombre de usuario:</label>
             <input type="text" id="nombre_usuario" name="nombre_usuario" required>

@@ -14,7 +14,7 @@
 <h3>Recuerda loggearte para apuntarte a partidas :)</h3>
 <br>
 <div class="form-container">
-    <form action="../Controller/UsuarioController.php" method="post">
+    <form action="../Controller/UsuarioController.php" method="post" class="generic-form">
         <div class="form-group">
             <label for="nombre_usuario">Nombre de usuario:</label>
             <input type="text" id="nombre_usuario" name="nombre_usuario" required>

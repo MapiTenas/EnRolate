@@ -53,6 +53,18 @@ class Usuario {
         return $usuarios;
     }
 
+    public function ascenderUsuario() {
+        $conexion = getDbConnection();
+        $query = "UPDATE users SET tipo_usuario = 'director' WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $this->id);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        $conexion->close();
+        return $resultado;
+    }
+
+
 
 
     public function getId()

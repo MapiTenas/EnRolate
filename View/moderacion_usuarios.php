@@ -39,10 +39,15 @@ $usuarios = $controller->listarUsuarios();
                     <td><?php echo htmlspecialchars($usuario->getEmail()); ?></td>
                     <td>
                         <?php if ($usuario->getTipoUsuario() == 'jugador'): ?>
-                            <button class="btn-ascender">Ascender</button></td>
-                    <?php elseif ($usuario->getTipoUsuario() == 'director'): ?>
-                        <button class="btn-degradar">Degradar</button>
-                    <?php endif; ?>
+                            <form method="POST" action="../Controller/UsuarioController.php" class="form-ascender">
+                                <input type="hidden" name="id" value="<?php echo $usuario->getId(); ?>">
+                                <button type="submit" name="ascender" class="btn-ascender">Ascender</button>
+                            </form>
+                        <?php elseif ($usuario->getTipoUsuario() == 'director'): ?>
+                            <button class="btn-degradar">Degradar</button>
+                        <?php endif; ?>
+                    </td>
+
                 </tr>
             <?php endforeach; ?>
             </tbody>

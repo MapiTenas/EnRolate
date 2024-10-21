@@ -17,7 +17,9 @@
 <header>
     <div class="logo">
         <img src="/Resources/logo.png" alt="Logo web">
-        <h2 class="Nombre web">EnRolate</h2>
+        <a href="../View/index.php" style="text-decoration: none; color: inherit;">
+            <h2 class="Nombre web">EnRolate</h2>
+        </a>
     </div>
 
     <nav class="navbar">

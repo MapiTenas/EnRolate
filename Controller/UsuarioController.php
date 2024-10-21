@@ -35,6 +35,15 @@ class UsuarioController {
     public function listarUsuarios() {
         return Usuario::obtenerTodosLosUsuarios();
     }
+
+    public function ascender($id) {
+        $usuario = new Usuario($id, null, null, null, null, null);
+        return $usuario->ascenderUsuario();
+    }
+
+
+
+
 }
 
 
@@ -49,6 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         header("Location: ../View/index.php");
     } else {
         header("Location: ../View/formulario_registro.php");
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ascender'])) {
+    $controller = new UsuarioController();
+    if ($controller->ascender($_POST['id'])) {
+        header("Location: ../View/moderacion_usuarios.php");
+    } else {
+        echo "Error al ascender al usuario.";
     }
 }
 
