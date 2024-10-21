@@ -197,9 +197,16 @@ thead th {
 tbody td {
     padding: 10px;
     border-bottom: 1px solid #ccc;
-    background-color: #d8ecd8;
     text-align: center;
 
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #d8ecd8;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #9ee89e;
 }
 
 .btn-ascender {
