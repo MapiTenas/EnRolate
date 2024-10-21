@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>EnRolate</title>
-    <link rel="stylesheet" href="/Resources/styles.css">
+    <link rel="stylesheet" href="../Resources/styles.css">
 </head>
 
 <body>
