@@ -32,7 +32,7 @@ $partidaController->crearPartida();
             </div>
             <div class="form-group">
                 <label for="numero_jugadores">Numero de jugadores:</label>
-                <input type="number" id="numero_jugadores" name="numero_jugadores" required>
+                <input type="number" id="numero_jugadores" name="numero_jugadores" min="1" required>
             </div>
             <div class="form-group">
                 <label for="descripcion">Sinopsis:</label>
