@@ -37,9 +37,9 @@ class Partida {
             return false;
         }
 
-        $query = "INSERT INTO games (titulo, descripcion, franja_horaria, director_id, numero_jugadores, sistema, edad) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO games (titulo, descripcion, franja_horaria, director_id, numero_jugadores, sistema, edad, imagen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conexion->prepare($query);
-        $stmt->bind_param("sssssss", $this->titulo, $this->descripcion, $this->franja_horaria, $this->director_id, $this->numero_jugadores, $this->sistema, $this->edad);
+        $stmt->bind_param("ssssssss", $this->titulo, $this->descripcion, $this->franja_horaria, $this->director_id, $this->numero_jugadores, $this->sistema, $this->edad, $this->imagen);
 
         // Manejo de errores
         if ($stmt->execute()) {

@@ -15,20 +15,41 @@ class PartidaController {
             $numero_jugadores = $_POST['numero_jugadores'];
             $sistema = $_POST['sistema'];
             $edad = $_POST['edad'];
-            $imagen = '';
 
-            // Crear una nueva partida
+            // Manejar la subida de la imagen
+            $imagen = '';
+            if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
+                $target_dir = "../uploads/";  // Directorio donde guardarás las imágenes
+                $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
+
+                // Verificar si el archivo es una imagen
+                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+                if ($check !== false) {
+                    // Mover el archivo subido a la carpeta de destino
+                    if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $target_file)) {
+                        $imagen = $target_file;  // Guardar la ruta de la imagen
+                    } else {
+                        echo "Error al subir la imagen.";
+                        exit();
+                    }
+                } else {
+                    echo "El archivo no es una imagen.";
+                    exit();
+                }
+            }
+
+            // Crear una nueva partida con la imagen
             $partida = new Partida(null, $titulo, $descripcion, $franja_horaria, $director_id, $estado, $imagen, null, $numero_jugadores, $sistema, $edad);
 
             // Verificar si ya existe una partida del mismo director en esa franja horaria
             if ($partida->existePartidaEnFranjaHoraria($director_id, $franja_horaria)) {
-                // Guardar el mensaje de error en la sesión
                 $_SESSION['partida_error'] = "Ya tienes una partida publicada en la franja horaria seleccionada.";
                 header("Location: ../View/formulario_nueva_partida.php");
                 exit();
             }
 
-            // Si no hay conflicto, intentamos guardar la partida en la base de datos
+            // Guardar la partida en la base de datos
             if ($partida->crearPartida()) {
                 header("Location: ../View/index.php");
             } else {

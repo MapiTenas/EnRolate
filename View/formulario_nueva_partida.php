@@ -21,7 +21,7 @@ $partidaController->crearPartida();
     <h1>Envia tu partida</h1>
     <h2>Recuerda que antes de ser publicada, pasará por moderación.</h2>
     <div class="form-container">
-        <form action="" method="post" class="partidas-form">
+        <form action="" method="post" enctype="multipart/form-data" class="partidas-form">
             <div class="form-group">
                 <label for="titulo">Titulo:</label>
                 <input type="text" id="titulo" name="titulo" required>
@@ -57,6 +57,10 @@ $partidaController->crearPartida();
                     <option value="Domingo-Mañana">Domingo-Mañana</option>
                     <option value="Domingo-Tarde">Domingo-Tarde</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="imagen">Imagen de la partida:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
             </div>
             <input type="hidden" name="director_id" value="<?php echo $_SESSION['user_id']; ?>">
             <div class="form-group">
