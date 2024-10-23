@@ -31,13 +31,15 @@ class Usuario {
 
     }
 
-    public static function obtenerTodosLosUsuarios() {
+    public static function obtenerTodosLosUsuarios($limit, $offset) {
         $conexion = getDbConnection();
-        $query = "SELECT id, nombre_usuario, email, tipo_usuario, fecha_registro FROM users";
-        $resultado = $conexion->query($query);
+        $query = "SELECT id, nombre_usuario, email, tipo_usuario, fecha_registro FROM users LIMIT ? OFFSET ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
 
         $usuarios = [];
-
         while ($fila = $resultado->fetch_assoc()) {
             $usuarios[] = new Usuario(
                 $fila['id'],
@@ -49,6 +51,7 @@ class Usuario {
             );
         }
 
+        $stmt->close();
         $conexion->close();
         return $usuarios;
     }
@@ -75,9 +78,15 @@ class Usuario {
         return $resultado;
     }
 
-
-
-
+    public static function contarUsuarios() {
+        $conexion = getDbConnection();
+        $query = "SELECT COUNT(*) AS total FROM users";
+        $resultado = $conexion->query($query);
+        $total = $resultado->fetch_assoc()['total'];
+        $conexion->close();
+        return $total;
+    }
+    
     public function getId()
     {
         return $this->id;

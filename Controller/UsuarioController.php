@@ -32,8 +32,8 @@ class UsuarioController {
     }
 
     // Método para listar usuarios
-    public function listarUsuarios() {
-        return Usuario::obtenerTodosLosUsuarios();
+    public function listarUsuarios($limit, $offset) {
+        return Usuario::obtenerTodosLosUsuarios($limit, $offset);
     }
 
     public function ascender($id) {

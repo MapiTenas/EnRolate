@@ -2,7 +2,16 @@
 require_once '../Controller/UsuarioController.php';
 
 $controller = new UsuarioController();
-$usuarios = $controller->listarUsuarios();
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 10;
+$offset = ($page - 1) * $limit;
+
+// Obtener usuarios paginados
+$usuarios = $controller->listarUsuarios($limit, $offset);
+
+// Contar total de usuarios
+$totalUsuarios = Usuario::contarUsuarios();
+$totalPaginas = ceil($totalUsuarios / $limit);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +25,7 @@ $usuarios = $controller->listarUsuarios();
 <?php include '../Resources/header.php' ?>
 <br>
 <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador'): ?>
-    <h1>Aqui se van a moderar los usuarios</h1>
-    <h2>Sobre todo el tema de ascenderlos a Directores de juego </h2>
-    <h3>Suerte!</h3>
+    <h1>Moderación de usuarios</h1>
     <br>
 
     <div class="list-container">
@@ -55,6 +62,23 @@ $usuarios = $controller->listarUsuarios();
             <?php endforeach; ?>
             </tbody>
         </table>
+        <!-- Navegación de paginación -->
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>">Anterior</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+                <a href="?page=<?php echo $i; ?>" class="<?php if ($i == $page) echo 'active'; ?>">
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPaginas): ?>
+                <a href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+            <?php endif; ?>
+        </div>
+
     </div>
 <br><br>
 

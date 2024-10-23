@@ -27,9 +27,11 @@
         if (isset($_SESSION['nombre_usuario'])) {
                 if ($_SESSION['tipo_usuario'] == 'moderador'){
                     echo '<a href="../View/moderacion_usuarios.php">Moderación usuarios</a>';
+                }  elseif ($_SESSION['tipo_usuario'] == 'director') {
+                    echo '<a href="../View/formulario_nueva_partida.php">Envía tu partida</a>';
                 }
-            // El usuario ha iniciado sesión, mostramos el enlace de Cerrar sesión
-            echo '<a href="/Resources/logout.php">Cerrar sesión</a>';
+                // El usuario ha iniciado sesión, mostramos el enlace de Cerrar sesión
+                echo '<a href="/Resources/logout.php">Cerrar sesión</a>';
         } else {
             // El usuario no ha iniciado sesión, mostramos los enlaces de Registrate y Crea una nueva cuenta
             echo '<a href="../View/formulario_login.php">Login</a>';
