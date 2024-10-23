@@ -31,6 +31,12 @@ class Partida {
 
     public function crearPartida() {
         $conexion = getDbConnection();
+
+        if ($this->existePartidaEnFranjaHoraria($this->director_id, $this->franja_horaria)) {
+            echo "Error: Ya tienes una partida registrada en esta franja horaria.";
+            return false;
+        }
+
         $query = "INSERT INTO games (titulo, descripcion, franja_horaria, director_id, numero_jugadores, sistema, edad) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conexion->prepare($query);
         $stmt->bind_param("sssssss", $this->titulo, $this->descripcion, $this->franja_horaria, $this->director_id, $this->numero_jugadores, $this->sistema, $this->edad);
@@ -45,6 +51,21 @@ class Partida {
             return false;
         }
     }
+
+    public function existePartidaEnFranjaHoraria($director_id, $franja_horaria) {
+        $conexion = getDbConnection();
+        $query = "SELECT COUNT(*) FROM games WHERE director_id = ? AND franja_horaria = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("is", $director_id, $franja_horaria);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $conexion->close();
+
+        return $count > 0;
+    }
+
+
 
     public function getId()
     {

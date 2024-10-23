@@ -64,10 +64,33 @@ $partidaController->crearPartida();
             </div>
         </form>
     </div>
+    <div id="error-popup" class="popup"></div>
     <br>
     <br>
 
 <?php endif; ?>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener el mensaje de error de la sesión PHP
+        var errorMsg = "<?php echo isset($_SESSION['partida_error']) ? $_SESSION['partida_error'] : ''; ?>";
+        if (errorMsg) {
+            // Mostrar el popup con el mensaje de error
+            var popup = document.getElementById("error-popup");
+            popup.textContent = errorMsg;
+            popup.style.display = "block";
+
+            // Ocultar el popup después de 5 segundos
+            setTimeout(function() {
+                popup.style.display = "none";
+            }, 5000);
+
+            // Limpiar el mensaje de error después de mostrarlo
+            <?php $_SESSION['partida_error'] = ''; ?>
+        }
+    });
+</script>
 
 <?php include '../Resources/footer.php' ?>
 
