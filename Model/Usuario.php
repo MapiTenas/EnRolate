@@ -86,7 +86,7 @@ class Usuario {
         $conexion->close();
         return $total;
     }
-    
+
     public function getId()
     {
         return $this->id;
