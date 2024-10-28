@@ -27,6 +27,8 @@
         if (isset($_SESSION['nombre_usuario'])) {
                 if ($_SESSION['tipo_usuario'] == 'moderador'){
                     echo '<a href="../View/moderacion_usuarios.php">Moderación usuarios</a>';
+                    echo '<a href="../View/moderacion_partidas.php">Moderación partidas</a>';
+
                 }  elseif ($_SESSION['tipo_usuario'] == 'director') {
                     echo '<a href="../View/formulario_nueva_partida.php">Envía tu partida</a>';
                 }

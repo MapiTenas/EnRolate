@@ -65,7 +65,24 @@ class Partida {
         return $count > 0;
     }
 
+    public static function obtenerPartidasPendientes() {
+        $conexion = getDbConnection();
+        $query = "SELECT games.id, games.titulo, users.nombre_usuario AS director_nombre 
+              FROM games 
+              JOIN users ON games.director_id = users.id 
+              WHERE games.estado = 'pendiente'";
+        $stmt = $conexion->prepare($query);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
 
+        $partidasPendientes = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $partidasPendientes[] = $fila;
+        }
+
+        $conexion->close();
+        return $partidasPendientes;
+    }
 
     public function getId()
     {

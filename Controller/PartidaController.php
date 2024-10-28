@@ -30,11 +30,13 @@ class PartidaController {
                     if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $target_file)) {
                         $imagen = $target_file;  // Guardar la ruta de la imagen
                     } else {
-                        echo "Error al subir la imagen.";
+                        $_SESSION['partida_error'] = "Error al subir la imagen.";
+                        header("Location: ../View/formulario_nueva_partida.php");
                         exit();
                     }
                 } else {
-                    echo "El archivo no es una imagen.";
+                    $_SESSION['partida_error'] = "El archivo no es una imagen.";
+                    header("Location: ../View/formulario_nueva_partida.php");
                     exit();
                 }
             }
@@ -59,5 +61,11 @@ class PartidaController {
             }
         }
     }
+    public function listarPartidasPendientes() {
+        $partidasPendientes = Partida::obtenerPartidasPendientes();
+        return $partidasPendientes;
+    }
+
+
 }
 
