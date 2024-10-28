@@ -1,7 +1,15 @@
 <?php
 require_once '../Controller/PartidaController.php';
+
 $controller = new PartidaController();
-$partidasPendientes = $controller->listarPartidasPendientes();
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 10;
+$offset = ($page - 1) * $limit;
+
+$partidasPendientes = $controller->listarPartidasPendientes($limit, $offset);
+$totalPartidasPendientes = Partida::contarPartidasPendientes();
+$totalPaginas = ceil($totalPartidasPendientes / $limit);
+
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +51,22 @@ $partidasPendientes = $controller->listarPartidasPendientes();
             <?php endforeach; ?>
             </tbody>
         </table>
+        <!-- Navegación de paginación -->
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>">Anterior</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+                <a href="?page=<?php echo $i; ?>" class="<?php if ($i == $page) echo 'active'; ?>">
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPaginas): ?>
+                <a href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+            <?php endif; ?>
+        </div>
     </div>
     <br>
     <br>

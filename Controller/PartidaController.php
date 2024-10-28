@@ -61,8 +61,8 @@ class PartidaController {
             }
         }
     }
-    public function listarPartidasPendientes() {
-        $partidasPendientes = Partida::obtenerPartidasPendientes();
+    public function listarPartidasPendientes($limit, $offset) {
+        $partidasPendientes = Partida::obtenerPartidasPendientes($limit, $offset);
         return $partidasPendientes;
     }
 
