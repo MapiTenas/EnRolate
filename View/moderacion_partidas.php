@@ -47,7 +47,7 @@ $totalPaginas = ceil($totalPartidasPendientes / $limit);
                     <td><?php echo htmlspecialchars($partida['titulo']); ?></td>
                     <td><?php echo htmlspecialchars($partida['director_nombre']); ?></td>
                     <td>
-                        <a href="ver_partida.php?id=<?php echo $partida['id']; ?>">
+                        <a href="ficha_partida.php?id=<?php echo $partida['id']; ?>">
                             <img src="../Resources/lupa.png" alt="Ver ficha" style="width: 25px; height: 25px;">
                         </a>
                     </td>

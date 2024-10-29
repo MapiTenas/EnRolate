@@ -291,3 +291,77 @@ select {
     font-size: 16px;
 }
 
+/*CSS ficha individual partida*/
+.activity-card {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.activity-image {
+    width: 100%;
+    height: auto;
+}
+
+.activity-details {
+    padding: 1rem;
+}
+
+.activity-details h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.synopsis {
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #666;
+    text-align: justify;
+}
+
+.activity-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.activity-info div {
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.buttons-moderacion {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding-top: 10px;
+}
+
+.approve-button, .reject-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+}
+
+.reject-button {
+    background-color: #f44336;
+}
+
+.approve-button:hover {
+    background-color: #7ddc81;
+}
+.reject-button:hover {
+    background-color: #e8695f;
+}
+
+
