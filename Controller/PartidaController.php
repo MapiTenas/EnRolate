@@ -66,6 +66,9 @@ class PartidaController {
         return $partidasPendientes;
     }
 
-
+    public function verPartida($id) {
+        $partida = Partida::obtenerPartidaPorId($id);
+        return $partida;
+    }
 }
 

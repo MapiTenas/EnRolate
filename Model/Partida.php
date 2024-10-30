@@ -95,6 +95,24 @@ class Partida {
         return $total;
     }
 
+    public static function obtenerPartidaPorId($id) {
+        $conexion = getDbConnection();
+        $query = "SELECT games.*, users.nombre_usuario AS director_nombre 
+              FROM games 
+              JOIN users ON games.director_id = users.id 
+              WHERE games.id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $partida = $resultado->fetch_assoc();
+
+        $stmt->close();
+        $conexion->close();
+        return $partida;
+    }
+
+
     public function getId()
     {
         return $this->id;
