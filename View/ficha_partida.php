@@ -4,6 +4,13 @@ require_once '../Controller/PartidaController.php';
 $controller = new PartidaController();
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $partida = $controller->verPartida($id);
+
+if (!$partida) {
+    echo "<h1>No deberias estar viendo esto >:(</h1>";
+    exit;
+    //Todo: Estaria bien hacer un header() a alguna página de error custom un poco mas elegante??
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +39,7 @@ $partida = $controller->verPartida($id);
             <div><strong>Director de juego:</strong> <?php echo htmlspecialchars($partida['director_nombre']); ?></div>
         </div>
 
-        <?php if ($_SESSION['tipo_usuario'] == 'moderador'): ?>
+        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador'): ?>
             <div class="buttons-moderacion">
                 <button class="approve-button">Aprobar partida</button>
                 <button class="reject-button">Rechazar partida</button>

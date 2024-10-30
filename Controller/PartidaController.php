@@ -67,8 +67,14 @@ class PartidaController {
     }
 
     public function verPartida($id) {
+        session_start();
         $partida = Partida::obtenerPartidaPorId($id);
-        return $partida;
+        //Ahora también funciona si no hay ningun tipo de sesión iniciada
+        if ($partida['estado'] === 'pendiente' && (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'moderador')) {
+            return null;
+        }
+
+        return $partida; // Devolvemos la partida si es moderador o está aprobada
     }
 }
 
