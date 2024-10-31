@@ -364,4 +364,88 @@ select {
     background-color: #e8695f;
 }
 
+/*CSS relativo a las card del index */
+.card-index {
+    width: calc(33.33% - 20px); /* Ajusta el ancho al 33% del contenedor menos el gap */
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; /* Espacio entre filas */
+
+}
+
+.classes-card {
+    width: 40%;
+    background-color:#fffdda;
+    border-radius: 16px;
+    overflow: hidden;
+    -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.index-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.card-header {
+    width: 100%;
+    height: 100px;
+}
+.card .header {
+    border-bottom: 1px solid #ccc;
+    /*padding-bottom: 10px;*/
+}
+.card-header-title {
+    text-align: center;
+}
+
+.card-body {
+    position: relative;
+    background-color: white;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    align-items: flex-end;
+    text-align: center;
+    padding-left:5px;
+    padding-right: 5px;
+
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    text-align: center;
+}
+
+.card-footer p, .card-body p {
+    margin-top: -10px;
+}
+
+.clickable {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+.clickable:hover {
+    text-decoration: underline;
+}
+
+.list-cards-index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
 

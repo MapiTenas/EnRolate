@@ -19,24 +19,136 @@ if (isset($_SESSION['nombre_usuario'])){
     }
 }
 ?>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="grid">
+    <div class="list-cards-index">
+        <div class="card-index">
+            <img src="../uploads/d&d2.jpg" class="index-card-image">
+            <div class = "header">
+                <h2 class="card-header-title clickable">Titulo de la partida</h2>
+            </div>
+            <div class ="card-body">
+                <div>
+                    <h3>Sistema</h3>
+                    <p>D&D</p>
+                </div>
+                    <div>
+                        <h3>Jugadores</h3>
+                        <p>4</p>
+                    </div>
+                    <div>
+                        <h3>Edad recomendada</h3>
+                        <p>+12 años</p>
+                    </div>
+            </div>
+                <div class="card-footer">
+                    <div>
+                        <h3>Turno</h3>
+                        <p>Mañana-sábado</p>
+                    </div>
+                    <div>
+                        <h3>Disponibilidad</h3>
+                        <p>Inscripción abierta</p>
+                    </div>
+                </div>
+        </div>
 
+        <div class="card-index">
+            <img src="../uploads/vampire.jpg" class="index-card-image">
+            <div class = "header">
+                <h2 class="card-header-title clickable">Titulo de la partida</h2>
+            </div>
+            <div class ="card-body">
+                <div>
+                    <h3>Sistema</h3>
+                    <p>D&D</p>
+                </div>
+                <div>
+                    <h3>Jugadores</h3>
+                    <p>4</p>
+                </div>
+                <div>
+                    <h3>Edad recomendada</h3>
+                    <p>+12 años</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div>
+                    <h3>Turno</h3>
+                    <p>Mañana-sábado</p>
+                </div>
+                <div>
+                    <h3>Disponibilidad</h3>
+                    <p>Inscripción abierta</p>
+                </div>
+            </div>
+        </div>
 
+        <div class="card-index">
+            <img src="../uploads/vampire.jpg" class="index-card-image">
+            <div class = "header">
+                <h2 class="card-header-title clickable">Titulo de la partida</h2>
+            </div>
+            <div class ="card-body">
+                <div>
+                    <h3>Sistema</h3>
+                    <p>D&D</p>
+                </div>
+                <div>
+                    <h3>Jugadores</h3>
+                    <p>4</p>
+                </div>
+                <div>
+                    <h3>Edad recomendada</h3>
+                    <p>+12 años</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div>
+                    <h3>Turno</h3>
+                    <p>Mañana-sábado</p>
+                </div>
+                <div>
+                    <h3>Disponibilidad</h3>
+                    <p>Inscripción abierta</p>
+                </div>
+            </div>
+        </div>
 
-<?php include '../Resources/footer.php' ?>
+        <div class="card-index">
+            <img src="../uploads/vampire.jpg" class="index-card-image">
+            <div class = "header">
+                <h2 class="card-header-title clickable">Titulo de la partida</h2>
+            </div>
+            <div class ="card-body">
+                <div>
+                    <h3>Sistema</h3>
+                    <p>D&D</p>
+                </div>
+                <div>
+                    <h3>Jugadores</h3>
+                    <p>4</p>
+                </div>
+                <div>
+                    <h3>Edad recomendada</h3>
+                    <p>+12 años</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div>
+                    <h3>Turno</h3>
+                    <p>Mañana-sábado</p>
+                </div>
+                <div>
+                    <h3>Disponibilidad</h3>
+                    <p>Inscripción abierta</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <br>
+    <br>
+
+    <?php include '../Resources/footer.php' ?>
 </body>
 </html>
