@@ -39,8 +39,7 @@ if (!$partida) {
             <div><strong>Director de juego:</strong> <?php echo htmlspecialchars($partida['director_nombre']); ?></div>
         </div>
 
-        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador'): ?>
-            <div class="buttons-moderacion">
+        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador' && $partida['estado'] == 'pendiente'): ?>            <div class="buttons-moderacion">
                 <button class="approve-button">Aprobar partida</button>
                 <button class="reject-button">Rechazar partida</button>
             </div>
