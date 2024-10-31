@@ -112,6 +112,33 @@ class Partida {
         return $partida;
     }
 
+    public static function aprobarPartida($id) {
+        $conexion = getDbConnection();
+        $query = "UPDATE games SET estado = 'aprobada' WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $id);
+
+        $resultado = $stmt->execute();
+        $stmt->close();
+        $conexion->close();
+
+        return $resultado;
+    }
+
+    public static function rechazarPartida($id) {
+        $conexion = getDbConnection();
+        $query = "UPDATE games SET estado = 'cerrada' WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $id);
+
+        $resultado = $stmt->execute();
+        $stmt->close();
+        $conexion->close();
+
+        return $resultado;
+    }
+
+
 
     public function getId()
     {

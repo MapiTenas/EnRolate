@@ -76,5 +76,61 @@ class PartidaController {
 
         return $partida; // Devolvemos la partida si es moderador o está aprobada
     }
+
+    public function aprobarPartida($id) {
+        session_start();
+
+        // Verificamos si el usuario es un moderador
+        if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador') {
+            if (Partida::aprobarPartida($id)) {
+                $_SESSION['mensaje'] = "Partida aprobada con éxito.";
+            } else {
+                $_SESSION['error'] = "Error al aprobar la partida.";
+            }
+        } else {
+            $_SESSION['error'] = "No tienes permisos para aprobar esta partida.";
+        }
+
+        // Redireccionamos de vuelta a la página de visualización de la partida
+        header("Location: ../View/ficha_partida.php?id=" . $id);
+        exit();
+    }
+
+    public function rechazarPartida($id) {
+        session_start();
+
+        // Verificamos si el usuario es un moderador
+        if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador') {
+            if (Partida::rechazarPartida($id)) {
+                $_SESSION['mensaje'] = "Partida rechazada con éxito.";
+            } else {
+                $_SESSION['error'] = "Error al rechazada la partida.";
+            }
+        } else {
+            $_SESSION['error'] = "No tienes permisos para aprobar esta partida.";
+        }
+
+        // Redireccionamos de vuelta a la página de moderación de partidas
+        header("Location: ../View/moderacion_partidas.php");
+        exit();
+    }
+
+
+
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
+    $accion = $_POST['accion'];
+    $id = (int)$_POST['id'];
+
+    $controller = new PartidaController();
+
+    switch ($accion) {
+        case 'aprobar':
+            $controller->aprobarPartida($id);
+            break;
+        case 'rechazar':
+            $controller->rechazarPartida($id);
+            break;
+    }
 }
 

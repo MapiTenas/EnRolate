@@ -39,9 +39,18 @@ if (!$partida) {
             <div><strong>Director de juego:</strong> <?php echo htmlspecialchars($partida['director_nombre']); ?></div>
         </div>
 
-        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador' && $partida['estado'] == 'pendiente'): ?>            <div class="buttons-moderacion">
-                <button class="approve-button">Aprobar partida</button>
-                <button class="reject-button">Rechazar partida</button>
+        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador' && $partida['estado'] == 'pendiente'): ?>
+            <div class="buttons-moderacion">
+                <form action="../Controller/PartidaController.php" method="post">
+                    <input type="hidden" name="accion" value="aprobar">
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                    <button type="submit" class="approve-button">Aprobar partida</button>
+                </form>
+                <form action="../Controller/PartidaController.php" method="post">
+                    <input type="hidden" name="accion" value="rechazar">
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                    <button type="submit" class="reject-button">Rechazar partida</button>
+                </form>
             </div>
         <?php endif; ?>
     </div>
