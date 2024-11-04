@@ -88,7 +88,7 @@ class Partida {
     }
     public static function contarPartidasPendientes() {
         $conexion = getDbConnection();
-        $query = "SELECT COUNT(*) AS total FROM games";
+        $query = "SELECT COUNT(*) AS total FROM games WHERE estado = 'pendiente'";
         $resultado = $conexion->query($query);
         $total = $resultado->fetch_assoc()['total'];
         $conexion->close();
@@ -136,6 +136,36 @@ class Partida {
         $conexion->close();
 
         return $resultado;
+    }
+
+    public static function obtenerPartidasAprobadas($limit, $offset) {
+        $conexion = getDbConnection();
+        $query = "SELECT games.id, games.titulo, games.sistema, games.numero_jugadores, games.edad, games.franja_horaria, games.imagen, users.nombre_usuario AS director_nombre 
+              FROM games 
+              JOIN users ON games.director_id = users.id 
+              WHERE games.estado = 'aprobada'
+               LIMIT ? OFFSET ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ii", $limit,$offset);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        $partidasAprobadas = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $partidasAprobadas[] = $fila;
+        }
+
+        $stmt->close();
+        $conexion->close();
+        return $partidasAprobadas;
+    }
+    public static function contarPartidasAprobadas() {
+        $conexion = getDbConnection();
+        $query = "SELECT COUNT(*) AS total FROM games WHERE estado = 'aprobada'";
+        $resultado = $conexion->query($query);
+        $total = $resultado->fetch_assoc()['total'];
+        $conexion->close();
+        return $total;
     }
 
 

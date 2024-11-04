@@ -1,4 +1,15 @@
 <?php include '../Resources/session_start.php';
+require_once '../Controller/PartidaController.php';
+
+$controller = new PartidaController();
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 9;
+$offset = ($page - 1) * $limit;
+
+$partidasAprobadas = $controller->listarPartidasAprobadas($limit, $offset);
+$totalPartidasAprobadas = Partida::contarPartidasAprobadas();
+$totalPaginas = ceil($totalPartidasAprobadas / $limit);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,29 +32,34 @@ if (isset($_SESSION['nombre_usuario'])){
 ?>
 <div class="grid">
     <div class="list-cards-index">
+        <?php foreach ($partidasAprobadas as $partida):?>
         <div class="card-index">
-            <img src="../uploads/d&d2.jpg" class="index-card-image">
+            <img src="<?php echo htmlspecialchars($partida['imagen']); ?>" alt="Imagen de la partida" class="index-card-image">
             <div class = "header">
-                <h2 class="card-header-title clickable">Titulo de la partida</h2>
+                <h2 class="card-header-title clickable">
+                    <a href="ficha_partida.php?id=<?php echo $partida['id']; ?>">
+                        <?php echo htmlspecialchars($partida['titulo']); ?>
+                    </a>
+                </h2>
             </div>
             <div class ="card-body">
                 <div>
                     <h3>Sistema</h3>
-                    <p>D&D</p>
+                    <p><?php echo htmlspecialchars($partida['sistema']); ?></p>
                 </div>
                     <div>
                         <h3>Jugadores</h3>
-                        <p>4</p>
+                        <p><?php echo htmlspecialchars($partida['numero_jugadores'])?></p>
                     </div>
                     <div>
                         <h3>Edad recomendada</h3>
-                        <p>+12 años</p>
+                        <p><?php echo htmlspecialchars($partida['edad'])?></p>
                     </div>
             </div>
                 <div class="card-footer">
                     <div>
                         <h3>Turno</h3>
-                        <p>Mañana-sábado</p>
+                        <p><?php echo htmlspecialchars($partida['franja_horaria'])?></p>
                     </div>
                     <div>
                         <h3>Disponibilidad</h3>
@@ -51,7 +67,24 @@ if (isset($_SESSION['nombre_usuario'])){
                     </div>
                 </div>
         </div>
+        <?php endforeach; ?>
 </div>
+    <!-- Navegación de paginación -->
+    <div class="pagination">
+        <?php if ($page > 1): ?>
+            <a href="?page=<?php echo $page - 1; ?>">Anterior</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+            <a href="?page=<?php echo $i; ?>" class="<?php if ($i == $page) echo 'active'; ?>">
+                <?php echo $i; ?>
+            </a>
+        <?php endfor; ?>
+
+        <?php if ($page < $totalPaginas): ?>
+            <a href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+        <?php endif; ?>
+    </div>
     <br>
     <br>
 
