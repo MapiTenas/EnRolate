@@ -34,7 +34,7 @@ if (isset($_SESSION['nombre_usuario'])){
     <div class="list-cards-index">
         <?php foreach ($partidasAprobadas as $partida):?>
         <div class="card-index">
-            <img src="<?php echo htmlspecialchars($partida['imagen']); ?>" alt="Imagen de la partida" class="index-card-image">
+            <img src="<?php echo htmlspecialchars($partida['imagen'] ? $partida['imagen'] : '../Resources/placeholder.jpg'); ?>" alt="Imagen de la partida" class="index-card-image">
             <div class = "header">
                 <h2 class="card-header-title clickable">
                     <a href="ficha_partida.php?id=<?php echo $partida['id']; ?>">
