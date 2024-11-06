@@ -25,7 +25,7 @@ if (!$partida) {
 <?php include '../Resources/header.php' ?>
 
 <section class="activity-card">
-    <img src="<?php echo htmlspecialchars($partida['imagen']); ?>" alt="Imagen de la actividad" class="activity-image">
+    <img src="<?php echo htmlspecialchars($partida['imagen'] ? $partida['imagen'] : '../Resources/placeholder.jpg'); ?>" alt="Imagen de la actividad" class="activity-image">
 
     <div class="activity-details">
         <h1><?php echo htmlspecialchars($partida['titulo']); ?></h1>
