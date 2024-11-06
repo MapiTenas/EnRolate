@@ -16,7 +16,7 @@ class PartidaJugador {
         $this->fecha_inscripcion = $fecha_inscripcion;
     }
 
-    public function guardar() {
+    public function solicitarApuntarse() {
         $conexion = getDbConnection();
 
         $query = "INSERT INTO game_players (user_id, game_id, estado, fecha_inscripcion) VALUES (?, ?, ?, NOW())";
