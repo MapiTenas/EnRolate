@@ -115,8 +115,8 @@ class PartidaController {
         exit();
     }
 
-    public function listarPartidasAprobadas($limit, $offset, $filtro = null) {
-        return Partida::obtenerPartidasAprobadas($limit, $offset, $filtro);
+    public function listarPartidasAprobadas($limit, $offset, $filtroEdad = 'todas', $filtroFranja = 'todas') {
+        return Partida::obtenerPartidasAprobadas($limit, $offset, $filtroEdad, $filtroFranja);
     }
 
 

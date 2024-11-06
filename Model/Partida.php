@@ -138,24 +138,32 @@ class Partida {
         return $resultado;
     }
 
-    public static function obtenerPartidasAprobadas($limit, $offset, $filtro = null) {
+    public static function obtenerPartidasAprobadas($limit, $offset, $filtroEdad = null, $filtroFranja = null) {
         $conexion = getDbConnection();
         $query = "SELECT * FROM games WHERE estado = 'aprobada'";
 
         // Filtros
-        if ($filtro === 'mayores_12') {
+        if ($filtroEdad === 'mayores_12') {
             $query .= " AND edad = '+12 años'";
-        } elseif ($filtro === 'sabado_mañana') {
-            $query .= " AND franja_horaria = 'Sabado-Mañana'";
-        } elseif ($filtro === 'mayores_16') {
+        } elseif ($filtroEdad === 'mayores_16') {
             $query .= " AND edad = '+16 años'";
-        } elseif ($filtro === 'mayores_18') {
+        } elseif ($filtroEdad === 'mayores_18') {
             $query .= "AND edad = '+18 años'";
-        } elseif ($filtro === 'todos_los_publicos') {
+        } elseif ($filtroEdad === 'todos_los_publicos') {
             $query .= "AND edad = 'Todos los públicos'";
         }
 
-        $query .= " LIMIT ? OFFSET ?";
+        if ($filtroFranja === 'sabado_mañana') {
+            $query .= "AND franja_horaria = 'Sabado-Mañana'";
+        } elseif ($filtroFranja === 'sabado_tarde'){
+            $query .= "AND franja_horaria = 'Sabado-Tarde'";
+        } elseif ($filtroFranja === 'domingo_mañana'){
+            $query .= "AND franja_horaria = 'Domingo-Mañana'";
+        } elseif ($filtroFranja === 'domingo_tarde') {
+            $query .= "AND franja_horaria = 'Domingo-Tarde'";
+        }
+
+            $query .= " LIMIT ? OFFSET ?";
 
         $stmt = $conexion->prepare($query);
         $stmt->bind_param("ii", $limit, $offset);
@@ -171,21 +179,29 @@ class Partida {
         return $partidas;
     }
 
-    public static function contarPartidasAprobadas($filtro = null) {
+    public static function contarPartidasAprobadas($filtroEdad = null, $filtroFranja = null) {
         $conexion = getDbConnection();
         $query = "SELECT COUNT(*) AS total FROM games WHERE estado = 'aprobada'";
 
-        // Agregar condiciones basadas en el filtro
-        if ($filtro === 'mayores_12') {
+        // Filtros
+        if ($filtroEdad === 'mayores_12') {
             $query .= " AND edad = '+12 años'";
-        } elseif ($filtro === 'sabado_mañana') {
-            $query .= " AND franja_horaria = 'Sabado-Mañana'";
-        } elseif ($filtro === 'mayores_16') {
+        } elseif ($filtroEdad === 'mayores_16') {
             $query .= " AND edad = '+16 años'";
-        } elseif ($filtro === 'mayores_18') {
+        } elseif ($filtroEdad === 'mayores_18') {
             $query .= "AND edad = '+18 años'";
-        } elseif ($filtro === 'todos_los_publicos') {
+        } elseif ($filtroEdad === 'todos_los_publicos') {
             $query .= "AND edad = 'Todos los públicos'";
+        }
+
+        if ($filtroFranja === 'sabado_mañana') {
+            $query .= "AND franja_horaria = 'Sabado-Mañana'";
+        } elseif ($filtroFranja === 'sabado_tarde'){
+            $query .= "AND franja_horaria = 'Sabado-Tarde'";
+        } elseif ($filtroFranja === 'domingo_mañana'){
+            $query .= "AND franja_horaria = 'Domingo-Mañana'";
+        } elseif ($filtroFranja === 'domingo_tarde') {
+            $query .= "AND franja_horaria = 'Domingo-Tarde'";
         }
 
         $stmt = $conexion->prepare($query);

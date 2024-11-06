@@ -5,9 +5,10 @@ $controller = new PartidaController();
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 9;
 $offset = ($page - 1) * $limit;
-$filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todas';
-$partidasAprobadas = $controller->listarPartidasAprobadas($limit, $offset, $filtro);
-$totalPartidasAprobadas = Partida::contarPartidasAprobadas($filtro);
+$filtroEdad = isset($_GET['filtro_edad']) ? $_GET['filtro_edad'] : 'todas';
+$filtroFranja = isset($_GET['filtro_franja']) ? $_GET['filtro_franja'] : 'todas';
+$partidasAprobadas = $controller->listarPartidasAprobadas($limit, $offset, $filtroEdad, $filtroFranja);
+$totalPartidasAprobadas = Partida::contarPartidasAprobadas($filtroEdad, $filtroFranja);
 $totalPaginas = ceil($totalPartidasAprobadas / $limit);
 
 ?>
@@ -31,18 +32,25 @@ if (isset($_SESSION['nombre_usuario'])){
 }
 ?>
 <form method="GET" action="" class="dropdown-index">
-    <label for="filtro">Filtrar partidas por:</label>
-    <select name="filtro" id="filtro" class="select-dropdown">
+    <label for="filtro_edad">Filtrar partidas por edad:</label>
+    <select name="filtro_edad" id="filtro_edad" class="select-dropdown">
         <option value="todas">Todas</option>
         <option value="todos_los_publicos">Todos los públicos</option>
-        <option value="mayores_12">Mayores de 12 años
-        <option value="
-">Mayores de 16 años</option>
+        <option value="mayores_12">Mayores de 12 años</option>
+        <option value="mayores_16">Mayores de 16 años</option>
         <option value="mayores_18">Mayores de 18 años</option>
-
-        <option value="sabado_mañana">Sábado - Mañana</option>
     </select>
-    <button type="submit" class="btn-dropdown">Aplicar filtro</button>
+
+    <label for="filtro_franja">Filtrar partidas por franja horaria:</label>
+    <select name="filtro_franja" id="filtro_franja" class="select-dropdown">
+        <option value="todas">Todas</option>
+        <option value="sabado_mañana">Sábado - Mañana</option>
+        <option value="sabado_tarde">Sábado - Tarde</option>
+        <option value="domingo_mañana">Domingo - Mañana</option>
+        <option value="domingo_tarde">Domingo - Tarde</option>
+    </select>
+
+    <button type="submit" class="btn-dropdown">Aplicar filtros</button>
 </form>
 <div class="grid">
     <div class="list-cards-index">
@@ -86,19 +94,20 @@ if (isset($_SESSION['nombre_usuario'])){
     <!-- Navegación de paginación -->
     <div class="pagination">
         <?php if ($page > 1): ?>
-            <a href="?page=<?php echo $page - 1; ?>">Anterior</a>
+            <a href="?page=<?php echo $page - 1; ?>&filtro_edad=<?php echo htmlspecialchars($filtroEdad); ?>&filtro_franja=<?php echo htmlspecialchars($filtroFranja); ?>">Anterior</a>
         <?php endif; ?>
 
         <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-            <a href="?page=<?php echo $i; ?>" class="<?php if ($i == $page) echo 'active'; ?>">
+            <a href="?page=<?php echo $i; ?>&filtro_edad=<?php echo htmlspecialchars($filtroEdad); ?>&filtro_franja=<?php echo htmlspecialchars($filtroFranja); ?>" class="<?php if ($i == $page) echo 'active'; ?>">
                 <?php echo $i; ?>
             </a>
         <?php endfor; ?>
 
         <?php if ($page < $totalPaginas): ?>
-            <a href="?page=<?php echo $page + 1; ?>">Siguiente</a>
+            <a href="?page=<?php echo $page + 1; ?>&filtro_edad=<?php echo htmlspecialchars($filtroEdad); ?>&filtro_franja=<?php echo htmlspecialchars($filtroFranja); ?>">Siguiente</a>
         <?php endif; ?>
     </div>
+
     <br>
     <br>
 
