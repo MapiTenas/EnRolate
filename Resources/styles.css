@@ -449,3 +449,20 @@ select {
     padding: 20px;
 }
 
+/*Styles del dropdown*/
+
+.dropdown-index{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btn-dropdown{
+    width: 15rem;
+    margin-top: 10px;
+}
+
+.select-dropdown{
+    width: 20rem;
+    margin-top: 10px;
+}

@@ -138,35 +138,65 @@ class Partida {
         return $resultado;
     }
 
-    public static function obtenerPartidasAprobadas($limit, $offset) {
+    public static function obtenerPartidasAprobadas($limit, $offset, $filtro = null) {
         $conexion = getDbConnection();
-        $query = "SELECT games.id, games.titulo, games.sistema, games.numero_jugadores, games.edad, games.franja_horaria, games.imagen, users.nombre_usuario AS director_nombre 
-              FROM games 
-              JOIN users ON games.director_id = users.id 
-              WHERE games.estado = 'aprobada'
-               LIMIT ? OFFSET ?";
-        $stmt = $conexion->prepare($query);
-        $stmt->bind_param("ii", $limit,$offset);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
+        $query = "SELECT * FROM games WHERE estado = 'aprobada'";
 
-        $partidasAprobadas = [];
-        while ($fila = $resultado->fetch_assoc()) {
-            $partidasAprobadas[] = $fila;
+        // Filtros
+        if ($filtro === 'mayores_12') {
+            $query .= " AND edad = '+12 años'";
+        } elseif ($filtro === 'sabado_mañana') {
+            $query .= " AND franja_horaria = 'Sabado-Mañana'";
+        } elseif ($filtro === 'mayores_16') {
+            $query .= " AND edad = '+16 años'";
+        } elseif ($filtro === 'mayores_18') {
+            $query .= "AND edad = '+18 años'";
+        } elseif ($filtro === 'todos_los_publicos') {
+            $query .= "AND edad = 'Todos los públicos'";
         }
 
-        $stmt->close();
+        $query .= " LIMIT ? OFFSET ?";
+
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $partidas = [];
+        while ($row = $result->fetch_assoc()) {
+            $partidas[] = $row;
+        }
+
         $conexion->close();
-        return $partidasAprobadas;
+        return $partidas;
     }
-    public static function contarPartidasAprobadas() {
+
+    public static function contarPartidasAprobadas($filtro = null) {
         $conexion = getDbConnection();
         $query = "SELECT COUNT(*) AS total FROM games WHERE estado = 'aprobada'";
-        $resultado = $conexion->query($query);
+
+        // Agregar condiciones basadas en el filtro
+        if ($filtro === 'mayores_12') {
+            $query .= " AND edad = '+12 años'";
+        } elseif ($filtro === 'sabado_mañana') {
+            $query .= " AND franja_horaria = 'Sabado-Mañana'";
+        } elseif ($filtro === 'mayores_16') {
+            $query .= " AND edad = '+16 años'";
+        } elseif ($filtro === 'mayores_18') {
+            $query .= "AND edad = '+18 años'";
+        } elseif ($filtro === 'todos_los_publicos') {
+            $query .= "AND edad = 'Todos los públicos'";
+        }
+
+        $stmt = $conexion->prepare($query);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         $total = $resultado->fetch_assoc()['total'];
+
         $conexion->close();
         return $total;
     }
+
 
 
 

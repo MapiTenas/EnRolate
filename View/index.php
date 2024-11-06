@@ -5,9 +5,9 @@ $controller = new PartidaController();
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 9;
 $offset = ($page - 1) * $limit;
-
-$partidasAprobadas = $controller->listarPartidasAprobadas($limit, $offset);
-$totalPartidasAprobadas = Partida::contarPartidasAprobadas();
+$filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todas';
+$partidasAprobadas = $controller->listarPartidasAprobadas($limit, $offset, $filtro);
+$totalPartidasAprobadas = Partida::contarPartidasAprobadas($filtro);
 $totalPaginas = ceil($totalPartidasAprobadas / $limit);
 
 ?>
@@ -30,6 +30,20 @@ if (isset($_SESSION['nombre_usuario'])){
     }
 }
 ?>
+<form method="GET" action="" class="dropdown-index">
+    <label for="filtro">Filtrar partidas por:</label>
+    <select name="filtro" id="filtro" class="select-dropdown">
+        <option value="todas">Todas</option>
+        <option value="todos_los_publicos">Todos los públicos</option>
+        <option value="mayores_12">Mayores de 12 años
+        <option value="
+">Mayores de 16 años</option>
+        <option value="mayores_18">Mayores de 18 años</option>
+
+        <option value="sabado_mañana">Sábado - Mañana</option>
+    </select>
+    <button type="submit" class="btn-dropdown">Aplicar filtro</button>
+</form>
 <div class="grid">
     <div class="list-cards-index">
         <?php foreach ($partidasAprobadas as $partida):?>
