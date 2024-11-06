@@ -1,5 +1,6 @@
 <?php
 require_once '../Controller/PartidaController.php';
+require_once '../Controller/PartidaJugadorController.php';
 
 $controller = new PartidaController();
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -52,6 +53,18 @@ if (!$partida) {
                     <button type="submit" class="reject-button">Rechazar partida</button>
                 </form>
             </div>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'jugador'): ?>
+            <div class="buttons-moderacion">
+                <form action="../Controller/PartidaJugadorController.php" method="post">
+                    <input type="hidden" name="accion" value="apuntarse">
+                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                    <button type="submit" class="approve-button">Apuntarse a partida</button>
+                </form>
+
+            </div>
+
         <?php endif; ?>
     </div>
 </section>
