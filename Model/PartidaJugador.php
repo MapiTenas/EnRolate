@@ -29,6 +29,37 @@ class PartidaJugador {
         return $resultado;
     }
 
+    public function existeInscripcionEnFranjaHoraria($user_id, $franja_horaria) {
+        $conexion = getDbConnection();
+
+        $query = "SELECT COUNT(*) FROM game_players gp 
+              JOIN games g ON gp.game_id = g.id 
+              WHERE gp.user_id = ? AND g.franja_horaria = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("is", $user_id, $franja_horaria);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+        $conexion->close();
+
+        return $count > 0;
+    }
+
+    public function obtenerFranjaHorariaPorPartida($game_id) {
+        $conexion = getDbConnection();
+
+        $query = "SELECT franja_horaria FROM games WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $game_id);
+        $stmt->execute();
+        $stmt->bind_result($franja_horaria);
+        $stmt->fetch();
+        $stmt->close();
+        $conexion->close();
+
+        return $franja_horaria;
+    }
 
     public function getId()
     {
