@@ -16,7 +16,11 @@ class PartidaJugadorController {
             echo "<p>Error: Ya estás inscrito en una partida en la franja horaria seleccionada.</p>";
             return;
         }
-
+        // Verificar si el usuario ya fue rechazado en la misma partida
+        if ($partidaJugador->existeRechazoPrevio($user_id, $game_id)) {
+            echo "<p>Error: No puedes volver a inscribirte en una partida de la que ya fuiste rechazado.</p>";
+            return;
+        }
         // Proceder con la inscripción
         $resultado = $partidaJugador->solicitarApuntarse();
 

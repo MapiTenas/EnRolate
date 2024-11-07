@@ -34,7 +34,10 @@ class PartidaJugador {
 
         $query = "SELECT COUNT(*) FROM game_players gp 
               JOIN games g ON gp.game_id = g.id 
-              WHERE gp.user_id = ? AND g.franja_horaria = ?";
+              WHERE gp.user_id = ? 
+              AND g.franja_horaria = ? 
+              AND (gp.estado = 'pendiente' OR gp.estado = 'aceptado')";
+
         $stmt = $conexion->prepare($query);
         $stmt->bind_param("is", $user_id, $franja_horaria);
         $stmt->execute();
@@ -60,6 +63,27 @@ class PartidaJugador {
 
         return $franja_horaria;
     }
+
+    public function existeRechazoPrevio($user_id, $game_id) {
+        $conexion = getDbConnection();
+
+        $query = "SELECT COUNT(*) FROM game_players 
+              WHERE user_id = ? 
+              AND game_id = ? 
+              AND estado = 'rechazado'";
+
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ii", $user_id, $game_id);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+        $conexion->close();
+
+        return $count > 0;
+    }
+
+
 
     public function getId()
     {
