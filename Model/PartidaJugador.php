@@ -83,6 +83,22 @@ class PartidaJugador {
         return $count > 0;
     }
 
+    public function obtenerEstadoInscripcion($user_id, $game_id) {
+        $conexion = getDbConnection();
+
+        $query = "SELECT estado FROM game_players WHERE user_id = ? AND game_id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ii", $user_id, $game_id);
+        $stmt->execute();
+        $stmt->bind_result($estado);
+        $stmt->fetch();
+        $stmt->close();
+        $conexion->close();
+
+        return $estado;
+    }
+
+
 
 
     public function getId()

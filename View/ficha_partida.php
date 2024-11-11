@@ -12,6 +12,12 @@ if (!$partida) {
     //Todo: Estaria bien hacer un header() a alguna página de error custom un poco mas elegante??
 }
 
+$estadoInscripcion = null;
+if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
+    $controllerJugador = new PartidaJugadorController();
+    $estadoInscripcion = $controllerJugador->obtenerEstadoInscripcion($_SESSION['user_id'], $partida['id']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -56,16 +62,22 @@ if (!$partida) {
         <?php endif; ?>
         <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'jugador'): ?>
             <div class="buttons-moderacion">
-                <form action="../Controller/PartidaJugadorController.php" method="post">
-                    <input type="hidden" name="accion" value="apuntarse">
-                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
-                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
-                    <button type="submit" class="approve-button">Apuntarse a partida</button>
-                </form>
-
+                <?php if ($estadoInscripcion === 'pendiente'): ?>
+                    <h3>Tu solicitud está pendiente</h3>
+                <?php elseif ($estadoInscripcion === 'aceptado'): ?>
+                    <h3>Tu solicitud está aprobada</h3>
+                <?php elseif (is_null($estadoInscripcion)): ?>
+                    <!-- Solo mostramos el botón si no hay inscripción previa -->
+                    <form action="../Controller/PartidaJugadorController.php" method="post">
+                        <input type="hidden" name="accion" value="apuntarse">
+                        <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                        <button type="submit" class="approve-button">Apuntarse a partida</button>
+                    </form>
+                <?php endif; ?>
             </div>
-
         <?php endif; ?>
+
     </div>
 </section>
 

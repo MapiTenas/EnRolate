@@ -25,11 +25,18 @@ class PartidaJugadorController {
         $resultado = $partidaJugador->solicitarApuntarse();
 
         if ($resultado) {
-            header("Location: ../View/index.php");
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
         } else {
             echo "<p>Error al inscribirse en la partida</p>";
         }
     }
+
+    public function obtenerEstadoInscripcion($user_id, $game_id) {
+        $partidaJugador = new PartidaJugador(null, $user_id, $game_id, null, null);
+        return $partidaJugador->obtenerEstadoInscripcion($user_id, $game_id);
+    }
+
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'apuntarse') {
