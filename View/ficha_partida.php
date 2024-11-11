@@ -66,6 +66,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                     <h3>Tu solicitud está pendiente</h3>
                 <?php elseif ($estadoInscripcion === 'aceptado'): ?>
                     <h3>Tu solicitud está aprobada</h3>
+                <?php elseif ($estadoInscripcion === 'rechazado'): ?>
+                    <h3>Tu solicitud ha sido rechazada. No podrás volver a apuntarte a esta partida. </h3>
                 <?php elseif (is_null($estadoInscripcion)): ?>
                     <!-- Solo mostramos el botón si no hay inscripción previa -->
                     <form action="../Controller/PartidaJugadorController.php" method="post">
