@@ -127,7 +127,7 @@ class Partida {
 
     public static function rechazarPartida($id) {
         $conexion = getDbConnection();
-        $query = "SELECT COUNT(*) AS total FROM games WHERE estado = 'pendiente'";
+        $query = "UPDATE games SET estado = 'cerrada' WHERE id = ?";
         $stmt = $conexion->prepare($query);
         $stmt->bind_param("i", $id);
 

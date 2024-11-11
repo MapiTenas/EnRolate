@@ -1,4 +1,5 @@
 <?php
+require_once '../Resources/session_start.php';
 require_once '../Model/Partida.php';
 
 class PartidaController {
@@ -67,7 +68,6 @@ class PartidaController {
     }
 
     public function verPartida($id) {
-        session_start();
         $partida = Partida::obtenerPartidaPorId($id);
         //Ahora también funciona si no hay ningun tipo de sesión iniciada
         if ($partida['estado'] === 'pendiente' && (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'moderador')) {
@@ -78,8 +78,6 @@ class PartidaController {
     }
 
     public function aprobarPartida($id) {
-        session_start();
-
         // Verificamos si el usuario es un moderador
         if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador') {
             if (Partida::aprobarPartida($id)) {
@@ -97,8 +95,6 @@ class PartidaController {
     }
 
     public function rechazarPartida($id) {
-        session_start();
-
         // Verificamos si el usuario es un moderador
         if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador') {
             if (Partida::rechazarPartida($id)) {

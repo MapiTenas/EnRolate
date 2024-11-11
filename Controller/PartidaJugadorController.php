@@ -1,4 +1,5 @@
 <?php
+require_once '../Resources/session_start.php';
 require_once '../Model/PartidaJugador.php';
 
 class PartidaJugadorController {
@@ -13,13 +14,15 @@ class PartidaJugadorController {
 
         // Verificar si el usuario ya tiene una inscripción en la misma franja horaria
         if ($partidaJugador->existeInscripcionEnFranjaHoraria($user_id, $franja_horaria)) {
-            echo "<p>Error: Ya estás inscrito en una partida en la franja horaria seleccionada.</p>";
-            return;
+            $_SESSION['inscripcion_error'] = "Ya estás inscrito en una partida en la franja horaria seleccionada.";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+            exit();
         }
         // Verificar si el usuario ya fue rechazado en la misma partida
         if ($partidaJugador->existeRechazoPrevio($user_id, $game_id)) {
-            echo "<p>Error: No puedes volver a inscribirte en una partida de la que ya fuiste rechazado.</p>";
-            return;
+            $_SESSION['inscripcion_error'] = "No puedes volver a inscribirte en una partida de la que ya fuiste rechazado..";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+            exit();
         }
         // Proceder con la inscripción
         $resultado = $partidaJugador->solicitarApuntarse();
@@ -27,7 +30,9 @@ class PartidaJugadorController {
         if ($resultado) {
             header("Location: ../View/ficha_partida.php?id=" . $game_id);
         } else {
-            echo "<p>Error al inscribirse en la partida</p>";
+            $_SESSION['inscripcion_error'] = "Error al inscribirse en la partida.";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+            exit();
         }
     }
 

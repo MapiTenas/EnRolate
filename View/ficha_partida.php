@@ -1,4 +1,5 @@
 <?php
+require_once '../Resources/session_start.php';
 require_once '../Controller/PartidaController.php';
 require_once '../Controller/PartidaJugadorController.php';
 
@@ -82,6 +83,27 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
 
     </div>
 </section>
+<div id="error-popup" class="popup"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener el mensaje de error de la sesión PHP
+        var errorMsg = "<?php echo isset($_SESSION['inscripcion_error']) ? $_SESSION['inscripcion_error'] : ''; ?>";
+        if (errorMsg) {
+            // Mostrar el popup con el mensaje de error
+            var popup = document.getElementById("error-popup");
+            popup.textContent = errorMsg;
+            popup.style.display = "block";
+
+            // Ocultar el popup después de 5 segundos
+            setTimeout(function() {
+                popup.style.display = "none";
+            }, 5000);
+
+            // Limpiar el mensaje de error después de mostrarlo
+            <?php $_SESSION['inscripcion_error'] = ''; ?>
+        }
+    });
+</script>
 
 <?php include '../Resources/footer.php' ?>
 </body>
