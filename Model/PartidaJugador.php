@@ -121,6 +121,21 @@ class PartidaJugador {
         return $jugadores;
     }
 
+    public function actualizarEstadoJugador($user_id, $game_id, $nuevo_estado) {
+        $conexion = getDbConnection();
+
+        $query = "UPDATE game_players SET estado = ? WHERE user_id = ? AND game_id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("sii", $nuevo_estado, $user_id, $game_id);
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $conexion->close();
+
+        return $resultado;
+    }
+
+
 
 
 

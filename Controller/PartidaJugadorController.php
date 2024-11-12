@@ -46,6 +46,39 @@ class PartidaJugadorController {
         return $partidaJugador->obtenerJugadoresPendientes($game_id);
     }
 
+    public function aceptarJugador() {
+        $user_id = (int)$_POST['user_id'];
+        $game_id = (int)$_POST['game_id'];
+
+        $partidaJugador = new PartidaJugador(null, $user_id, $game_id, null, null);
+        $resultado = $partidaJugador->actualizarEstadoJugador($user_id, $game_id, 'aceptado');
+
+        if ($resultado) {
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+        } else {
+            $_SESSION['inscripcion_error'] = "Error al aceptar al jugador.";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+        }
+        exit();
+    }
+
+    public function rechazarJugador() {
+        $user_id = (int)$_POST['user_id'];
+        $game_id = (int)$_POST['game_id'];
+
+        $partidaJugador = new PartidaJugador(null, $user_id, $game_id, null, null);
+        $resultado = $partidaJugador->actualizarEstadoJugador($user_id, $game_id, 'rechazado');
+
+        if ($resultado) {
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+        } else {
+            $_SESSION['inscripcion_error'] = "Error al rechazar al jugador.";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+        }
+        exit();
+    }
+
+
 
 
 }
@@ -54,3 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     $controller = new PartidaJugadorController();
     $controller->apuntarseAPartida();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $controller = new PartidaJugadorController();
+
+    if (isset($_POST['accion']) && $_POST['accion'] === 'aceptar-jugador') {
+        $controller->aceptarJugador();
+    } elseif (isset($_POST['accion']) && $_POST['accion'] === 'rechazar-jugador') {
+        $controller->rechazarJugador();
+    }
+}
+
