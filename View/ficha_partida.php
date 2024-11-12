@@ -88,42 +88,46 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
             ?>
             <div>
                 <h2>Inscripciones pendientes</h2>
-                <table>
-                    <thead>
+                <?php if (empty($jugadoresPendientes)): ?>
+                    <h4>No hay inscripciones pendientes.</h4>
+                <?php else: ?>
+                    <table>
+                        <thead>
                         <tr>
                             <th>Jugador</th>
                             <th>¿Aceptar o rechazar?</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($jugadoresPendientes as $jugador): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($jugador['nombre_usuario']); ?></td>
-                            <td class="btn-mod-jugador-partida">
-                                <form action="../Controller/PartidaJugadorController.php" method="post" style="display:inline;">
-                                    <input type="hidden" name="accion" value="aceptar-jugador">
-                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($jugador['id']); ?>">
-                                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
-                                    <button type="submit" class="accept-player-btn">
-                                        <img src="../Resources/accept.png" alt="Aceptar">
-                                    </button>
-                                </form>
-                                <form action="../Controller/PartidaJugadorController.php" method="post" style="display:inline;">
-                                    <input type="hidden" name="accion" value="rechazar-jugador">
-                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($jugador['id']); ?>">
-                                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
-                                    <button type="submit" class="refuse-player-btn">
-                                        <img src="../Resources/refuse.png" alt="Rechazar">
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($jugadoresPendientes as $jugador): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($jugador['nombre_usuario']); ?></td>
+                                <td class="btn-mod-jugador-partida">
+                                    <form action="../Controller/PartidaJugadorController.php" method="post" style="display:inline;">
+                                        <input type="hidden" name="accion" value="aceptar-jugador">
+                                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($jugador['id']); ?>">
+                                        <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                                        <button type="submit" class="accept-player-btn">
+                                            <img src="../Resources/accept.png" alt="Aceptar">
+                                        </button>
+                                    </form>
+                                    <form action="../Controller/PartidaJugadorController.php" method="post" style="display:inline;">
+                                        <input type="hidden" name="accion" value="rechazar-jugador">
+                                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($jugador['id']); ?>">
+                                        <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                                        <button type="submit" class="refuse-player-btn">
+                                            <img src="../Resources/refuse.png" alt="Rechazar">
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
             </div>
-
         <?php endif; ?>
+
 
     </div>
 </section>

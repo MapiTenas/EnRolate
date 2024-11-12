@@ -103,7 +103,7 @@ footer a:hover {
 }
 
 /*CSS relativo a textos*/
-h1, h2, h3 {
+h1, h2, h3, h4 {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
