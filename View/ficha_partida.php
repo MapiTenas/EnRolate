@@ -81,6 +81,52 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
             </div>
         <?php endif; ?>
 
+        <?php
+        if ((isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador') ||
+            (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'director' && $_SESSION['user_id'] == $partida['director_id'])):
+            ?>
+            <div>
+                <h2>Inscripciones pendientes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jugador</th>
+                            <th>¿Aceptar o rechazar?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mapi</td>
+                            <td class="btn-mod-jugador-partida">
+                                <form action="" method="post" style="display:inline;">
+                                    <input type="hidden" name="accion" value="aceptar-jugador">
+                                    <input type="hidden" name="user_id" value="ID_DEL_USUARIO">
+                                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                                    <button type="submit" class="accept-player-btn">
+                                        <img src="../Resources/accept.png" alt="Aceptar">
+                                    </button>
+                                </form>
+                                <form action="" method="post" style="display:inline;">
+                                    <input type="hidden" name="accion" value="rechazar-jugador">
+                                    <input type="hidden" name="user_id" value="">
+                                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                                    <button type="submit" class="refuse-player-btn">
+                                        <img src="../Resources/refuse.png" alt="Rechazar">
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        <?php endif; ?>
+
     </div>
 </section>
 <div id="error-popup" class="popup"></div>

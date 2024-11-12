@@ -469,3 +469,25 @@ select {
     width: 20rem;
     margin-top: 10px;
 }
+
+/*Styles moderación jugadores en partida */
+.btn-mod-jugador-partida {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+button.accept-player-btn,
+button.refuse-player-btn {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+button.accept-player-btn img,
+button.refuse-player-btn img {
+    width: 24px;
+    height: 24px;
+}
