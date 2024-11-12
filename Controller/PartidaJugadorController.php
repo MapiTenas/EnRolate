@@ -41,6 +41,12 @@ class PartidaJugadorController {
         return $partidaJugador->obtenerEstadoInscripcion($user_id, $game_id);
     }
 
+    public function obtenerJugadoresPendientes($game_id) {
+        $partidaJugador = new PartidaJugador(null, null, $game_id, null, null);
+        return $partidaJugador->obtenerJugadoresPendientes($game_id);
+    }
+
+
 
 }
 

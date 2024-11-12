@@ -4,8 +4,10 @@ require_once '../Controller/PartidaController.php';
 require_once '../Controller/PartidaJugadorController.php';
 
 $controller = new PartidaController();
+$controllerJugador = new PartidaJugadorController();
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $partida = $controller->verPartida($id);
+$jugadoresPendientes = $controllerJugador->obtenerJugadoresPendientes($id);
 
 if (!$partida) {
     echo "<h1>No deberias estar viendo esto >:(</h1>";
@@ -15,7 +17,6 @@ if (!$partida) {
 
 $estadoInscripcion = null;
 if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
-    $controllerJugador = new PartidaJugadorController();
     $estadoInscripcion = $controllerJugador->obtenerEstadoInscripcion($_SESSION['user_id'], $partida['id']);
 }
 
@@ -95,20 +96,21 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                         </tr>
                     </thead>
                     <tbody>
+                    <?php foreach ($jugadoresPendientes as $jugador): ?>
                         <tr>
-                            <td>Mapi</td>
+                            <td><?php echo htmlspecialchars($jugador['nombre_usuario']); ?></td>
                             <td class="btn-mod-jugador-partida">
-                                <form action="" method="post" style="display:inline;">
+                                <form action="../Controller/PartidaJugadorController.php" method="post" style="display:inline;">
                                     <input type="hidden" name="accion" value="aceptar-jugador">
-                                    <input type="hidden" name="user_id" value="ID_DEL_USUARIO">
+                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($jugador['id']); ?>">
                                     <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
                                     <button type="submit" class="accept-player-btn">
                                         <img src="../Resources/accept.png" alt="Aceptar">
                                     </button>
                                 </form>
-                                <form action="" method="post" style="display:inline;">
+                                <form action="../Controller/PartidaJugadorController.php" method="post" style="display:inline;">
                                     <input type="hidden" name="accion" value="rechazar-jugador">
-                                    <input type="hidden" name="user_id" value="">
+                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($jugador['id']); ?>">
                                     <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
                                     <button type="submit" class="refuse-player-btn">
                                         <img src="../Resources/refuse.png" alt="Rechazar">
@@ -116,11 +118,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                                 </form>
                             </td>
                         </tr>
-
-
-
-
-
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

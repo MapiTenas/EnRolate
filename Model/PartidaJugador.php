@@ -98,6 +98,30 @@ class PartidaJugador {
         return $estado;
     }
 
+    public function obtenerJugadoresPendientes($game_id) {
+        $conexion = getDbConnection();
+
+        $query = "SELECT u.id, u.nombre_usuario FROM game_players gp 
+              JOIN users u ON gp.user_id = u.id 
+              WHERE gp.game_id = ? AND gp.estado = 'pendiente'";
+
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $game_id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        $jugadores = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $jugadores[] = $fila;
+        }
+
+        $stmt->close();
+        $conexion->close();
+
+        return $jugadores;
+    }
+
+
 
 
 
