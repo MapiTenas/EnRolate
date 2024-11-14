@@ -69,18 +69,23 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                 <?php elseif ($estadoInscripcion === 'aceptado'): ?>
                     <h3>Tu solicitud está aprobada</h3>
                 <?php elseif ($estadoInscripcion === 'rechazado'): ?>
-                    <h3>Tu solicitud ha sido rechazada. No podrás volver a apuntarte a esta partida. </h3>
+                    <h3>Tu solicitud ha sido rechazada. No podrás volver a apuntarte a esta partida.</h3>
                 <?php elseif (is_null($estadoInscripcion)): ?>
-                    <!-- Solo mostramos el botón si no hay inscripción previa -->
-                    <form action="../Controller/PartidaJugadorController.php" method="post">
-                        <input type="hidden" name="accion" value="apuntarse">
-                        <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
-                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
-                        <button type="submit" class="approve-button">Apuntarse a partida</button>
-                    </form>
+                    <!-- Verificamos si hay plazas disponibles -->
+                    <?php if ($partida['plazas_disponibles'] > 0): ?>
+                        <form action="../Controller/PartidaJugadorController.php" method="post">
+                            <input type="hidden" name="accion" value="apuntarse">
+                            <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                            <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                            <button type="submit" class="approve-button">Apuntarse a partida</button>
+                        </form>
+                    <?php else: ?>
+                        <h3>La partida ya está llena</h3>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
+
 
         <?php
         if ((isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador') ||
