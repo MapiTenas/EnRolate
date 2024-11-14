@@ -1,6 +1,7 @@
 <?php
 require_once '../Resources/session_start.php';
 require_once '../Model/PartidaJugador.php';
+require_once 'PartidaController.php';
 
 class PartidaJugadorController {
     public function apuntarseAPartida() {
@@ -13,7 +14,7 @@ class PartidaJugadorController {
         $franja_horaria = $partidaJugador->obtenerFranjaHorariaPorPartida($game_id);
 
         // Verificar si el usuario ya tiene una inscripción en la misma franja horaria
-        if ($partidaJugador->existeInscripcionEnFranjaHoraria($user_id, $franja_horaria)) {
+        if ($partidaJugador->existeInscripcionEnFranjaHoraria($user_id, $franja_horaria, 'pendiente')) {
             $_SESSION['inscripcion_error'] = "Ya estás inscrito en una partida en la franja horaria seleccionada.";
             header("Location: ../View/ficha_partida.php?id=" . $game_id);
             exit();
@@ -49,8 +50,28 @@ class PartidaJugadorController {
     public function aceptarJugador() {
         $user_id = (int)$_POST['user_id'];
         $game_id = (int)$_POST['game_id'];
+        $franja_horaria = (string)$_POST['franja_horaria'];
+
+        // Obtener el número de plazas disponibles en la partida
+        $partidaController = new PartidaController();
+        $partida = $partidaController->verPartida($game_id);
+
+        // Verificar si hay plazas disponibles
+        if ($partida['plazas_disponibles'] <= 0) {
+            $_SESSION['inscripcion_error'] = "La partida ya está llena. No se pueden aceptar más jugadores.";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+            exit();
+        }
 
         $partidaJugador = new PartidaJugador(null, $user_id, $game_id, null, null);
+        // Verificar si el usuario ya tiene una inscripción aceptada en la misma franja horaria
+        if ($partidaJugador->existeInscripcionEnFranjaHoraria($user_id, $franja_horaria, 'aceptado')) {
+            $_SESSION['inscripcion_error'] = "El jugador ya ha sido aceptado en otra partida en la misma franja horaria.";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+            exit();
+        }
+
+        // Si hay plazas disponibles, proceder a aceptar al jugador
         $resultado = $partidaJugador->actualizarEstadoJugador($user_id, $game_id, 'aceptado');
 
         if ($resultado) {
@@ -61,6 +82,7 @@ class PartidaJugadorController {
         }
         exit();
     }
+
 
     public function rechazarJugador() {
         $user_id = (int)$_POST['user_id'];

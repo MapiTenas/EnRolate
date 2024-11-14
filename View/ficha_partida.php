@@ -112,6 +112,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                                         <input type="hidden" name="accion" value="aceptar-jugador">
                                         <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($jugador['id']); ?>">
                                         <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                                        <input type="hidden" name="franja_horaria" value="<?php echo htmlspecialchars($partida['franja_horaria']); ?>">
                                         <button type="submit" class="accept-player-btn">
                                             <img src="../Resources/accept.png" alt="Aceptar">
                                         </button>

@@ -29,17 +29,18 @@ class PartidaJugador {
         return $resultado;
     }
 
-    public function existeInscripcionEnFranjaHoraria($user_id, $franja_horaria) {
+    public function existeInscripcionEnFranjaHoraria($user_id, $franja_horaria, $estado) {
         $conexion = getDbConnection();
 
         $query = "SELECT COUNT(*) FROM game_players gp 
               JOIN games g ON gp.game_id = g.id 
               WHERE gp.user_id = ? 
               AND g.franja_horaria = ? 
-              AND (gp.estado = 'pendiente' OR gp.estado = 'aceptado')";
+              AND gp.estado = ?";
+        //AND (gp.estado = 'pendiente' OR gp.estado = 'aceptado')";
 
         $stmt = $conexion->prepare($query);
-        $stmt->bind_param("is", $user_id, $franja_horaria);
+        $stmt->bind_param("iss", $user_id, $franja_horaria, $estado);
         $stmt->execute();
         $stmt->bind_result($count);
         $stmt->fetch();
