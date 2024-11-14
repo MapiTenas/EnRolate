@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
             <div><strong>Sistema de juego:</strong> <?php echo htmlspecialchars($partida['sistema']); ?></div>
             <div><strong>Edad recomendada:</strong> <?php echo htmlspecialchars($partida['edad']); ?></div>
             <div><strong>Horario:</strong> <?php echo htmlspecialchars($partida['franja_horaria']); ?></div>
-            <div><strong>Plazas disponibles:</strong> <?php echo htmlspecialchars($partida['numero_jugadores']); ?></div>
+            <div><strong>Plazas disponibles:</strong> <?php echo htmlspecialchars($partida['plazas_disponibles']); ?></div>
             <div><strong>Director de juego:</strong> <?php echo htmlspecialchars($partida['director_nombre']); ?></div>
         </div>
 

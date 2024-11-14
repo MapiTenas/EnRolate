@@ -97,7 +97,11 @@ class Partida {
 
     public static function obtenerPartidaPorId($id) {
         $conexion = getDbConnection();
-        $query = "SELECT games.*, users.nombre_usuario AS director_nombre 
+        $query = "SELECT games.*, users.nombre_usuario AS director_nombre, 
+              (games.numero_jugadores - 
+                 (SELECT COUNT(*) FROM game_players 
+                  WHERE game_id = games.id AND estado = 'aceptado')
+              ) AS plazas_disponibles
               FROM games 
               JOIN users ON games.director_id = users.id 
               WHERE games.id = ?";
@@ -212,10 +216,6 @@ class Partida {
         $conexion->close();
         return $total;
     }
-
-
-
-
     public function getId()
     {
         return $this->id;

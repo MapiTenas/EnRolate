@@ -78,15 +78,7 @@ class PartidaJugadorController {
         exit();
     }
 
-
-
-
 }
-
-/*if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'apuntarse') {
-    $controller = new PartidaJugadorController();
-    $controller->apuntarseAPartida();
-}*/
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $controller = new PartidaJugadorController();
