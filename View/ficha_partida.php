@@ -68,7 +68,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                     <h3>Tu solicitud está pendiente</h3>
                 <?php elseif ($estadoInscripcion === 'aceptado'): ?>
                     <!--<h3>Tu solicitud está aprobada</h3> -->
-                    <form action="../Controller/PartidaJugadorController.php" method="post">
+                    <form action="../Controller/PartidaJugadorController.php" method="post", onsubmit="return confirmarAbandono();">
                         <input type="hidden" name="accion" value="abandonar">
                         <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
                         <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
@@ -163,6 +163,9 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
             <?php $_SESSION['inscripcion_error'] = ''; ?>
         }
     });
+    function confirmarAbandono() {
+        return confirm("¿Estás seguro de que quieres abandonar esta partida?");
+    }
 </script>
 
 <?php include '../Resources/footer.php' ?>
