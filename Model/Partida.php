@@ -144,7 +144,14 @@ class Partida {
 
     public static function obtenerPartidasAprobadas($limit, $offset, $filtroEdad = null, $filtroFranja = null) {
         $conexion = getDbConnection();
-        $query = "SELECT * FROM games WHERE estado = 'aprobada'";
+        $query = "
+            SELECT g.*, 
+               (g.numero_jugadores - 
+               COALESCE((SELECT COUNT(*) 
+                         FROM game_players gp 
+                         WHERE gp.game_id = g.id AND gp.estado = 'aceptado'), 0)) AS plazas_restantes
+            FROM games g
+            WHERE g.estado = 'aprobada'";
 
         // Filtros
         if ($filtroEdad === 'mayores_12') {

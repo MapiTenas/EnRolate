@@ -71,7 +71,7 @@ if (isset($_SESSION['nombre_usuario'])){
                 </div>
                     <div>
                         <h3>Jugadores</h3>
-                        <p><?php echo htmlspecialchars($partida['numero_jugadores'])?></p>
+                        <p><?php echo htmlspecialchars($partida['numero_jugadores'])?></p> <!--Si quiero que salga el numero actualizado de plazas, con poner 'plazas_restantes' es suficiente -->
                     </div>
                     <div>
                         <h3>Edad recomendada</h3>
@@ -85,7 +85,15 @@ if (isset($_SESSION['nombre_usuario'])){
                     </div>
                     <div>
                         <h3>Disponibilidad</h3>
-                        <p>Inscripción abierta</p>
+                        <p>
+                            <?php
+                            if ($partida['plazas_restantes'] > 0) {
+                                echo "Inscripción abierta";
+                            } else {
+                                echo "Partida llena";
+                            }
+                            ?>
+                        </p>
                     </div>
                 </div>
         </div>
