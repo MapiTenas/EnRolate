@@ -14,7 +14,7 @@ class PartidaJugadorController {
         $franja_horaria = $partidaJugador->obtenerFranjaHorariaPorPartida($game_id);
 
         // Verificar si el usuario ya tiene una inscripción en la misma franja horaria
-        if ($partidaJugador->existeInscripcionEnFranjaHoraria($user_id, $franja_horaria, 'pendiente')) {
+        if ($partidaJugador->existeInscripcionEnFranjaHoraria($user_id, $franja_horaria, 'aceptado')) {
             $_SESSION['inscripcion_error'] = "Ya estás inscrito en una partida en la franja horaria seleccionada.";
             header("Location: ../View/ficha_partida.php?id=" . $game_id);
             exit();
@@ -100,6 +100,23 @@ class PartidaJugadorController {
         exit();
     }
 
+    public function abandonarPartida(){
+        $user_id = (int)$_POST['user_id'];
+        $game_id = (int)$_POST['game_id'];
+
+        $partidaJugador = new PartidaJugador(null, $user_id,$game_id,null,null);
+        $resultado = $partidaJugador->desapuntarseDePartida($user_id,$game_id);
+
+        if ($resultado) {
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+        } else {
+            $_SESSION['inscripcion_error'] = "Error al desapuntarte de la partida.";
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+        }
+        exit();
+
+    }
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -111,6 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $controller->rechazarJugador();
     } elseif (isset($_POST['accion']) && $_POST['accion'] === 'apuntarse') {
         $controller->apuntarseAPartida();
+    } elseif (isset($_POST['accion']) && $_POST['accion'] === 'abandonar') {
+        $controller->abandonarPartida();
     }
 }
 

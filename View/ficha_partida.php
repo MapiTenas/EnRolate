@@ -67,7 +67,13 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                 <?php if ($estadoInscripcion === 'pendiente'): ?>
                     <h3>Tu solicitud está pendiente</h3>
                 <?php elseif ($estadoInscripcion === 'aceptado'): ?>
-                    <h3>Tu solicitud está aprobada</h3>
+                    <!--<h3>Tu solicitud está aprobada</h3> -->
+                    <form action="../Controller/PartidaJugadorController.php" method="post">
+                        <input type="hidden" name="accion" value="abandonar">
+                        <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                        <button type="submit" class="reject-button">Abandonar partida </button>
+                    </form>
                 <?php elseif ($estadoInscripcion === 'rechazado'): ?>
                     <h3>Tu solicitud ha sido rechazada. No podrás volver a apuntarte a esta partida.</h3>
                 <?php elseif (is_null($estadoInscripcion)): ?>

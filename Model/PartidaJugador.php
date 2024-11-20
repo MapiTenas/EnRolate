@@ -136,7 +136,21 @@ class PartidaJugador {
         return $resultado;
     }
 
+    public function desapuntarseDePartida($user_id, $game_id){
+        $conexion = getDbConnection();
 
+        $query = "DELETE FROM `game_players` 
+                    WHERE `user_id` = ? 
+                    AND `game_id` = ?;";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("ii", $user_id, $game_id);
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $conexion->close();
+
+        return $resultado;
+    }
 
 
 
