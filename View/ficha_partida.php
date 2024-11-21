@@ -139,6 +139,35 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                 <?php endif; ?>
             </div>
         <?php endif; ?>
+        <?php if ($partida['estado'] === 'aprobada' &&
+            (
+                (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'moderador') ||
+                (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'director' && $_SESSION['user_id'] == $partida['director_id']) ||
+                ($estadoInscripcion === 'aceptado')
+            )): ?>
+            <h2>¡Unete a la conversación de la partida!</h2>
+            <div class="comment-section">
+                <form action="../Controller/ComentariosController.php" method="post" class="comment-form">
+                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id'] ?? ''); ?>">
+                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                    <textarea name="comentario" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
+                    <button type="submit" class="submit-comment-btn">Enviar comentario</button>
+                </form>
+                <div class="comment-card">
+                    <p class="comment-content">Este comentario esta soldado al código! </p>
+                    <div class="comment-footer">
+                        <span class="comment-author">Publicado por: Mapi</span>
+                        <span class="comment-date">Fecha: 21/11/2024</span>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+        <?php endif; ?>
 
 
     </div>
