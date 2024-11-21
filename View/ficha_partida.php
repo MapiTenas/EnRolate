@@ -163,7 +163,10 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                             <p class="comment-content"><?php echo htmlspecialchars($comentario['texto']); ?></p>
                             <div class="comment-footer">
                                 <span class="comment-author">Publicado por: <?php echo htmlspecialchars($comentario['nombre_usuario']); ?></span>
-                                <span class="comment-date">Fecha: <?php echo htmlspecialchars($comentario['fecha_comentario']); ?></span>
+                                <span class="comment-date">
+                                    <?php echo date('d-m-Y', strtotime($comentario['fecha_comentario'])); ?>
+                                    - <?php echo date('H:i', strtotime($comentario['fecha_comentario'])); ?>
+                                </span>
                             </div>
                         </div>
                     <?php endforeach; ?>
