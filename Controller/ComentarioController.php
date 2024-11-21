@@ -28,6 +28,10 @@ class ComentarioController {
             }
         }
     }
+    public function obtenerComentariosPorPartida($game_id) {
+        return Comentario::obtenerComentariosPorPartida($game_id);
+    }
+
 }
 
 // Ejecutar el método

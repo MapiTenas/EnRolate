@@ -36,4 +36,47 @@ class Comentario {
             return false;
         }
     }
+
+    public static function obtenerComentariosPorPartida($game_id) {
+        $conexion = getDbConnection();
+
+        $query = "
+        SELECT 
+            c.texto, 
+            c.fecha_comentario, 
+            u.nombre_usuario 
+        FROM 
+            comments c 
+        INNER JOIN 
+            users u 
+        ON 
+            c.user_id = u.id 
+        WHERE 
+            c.game_id = ?
+        ORDER BY 
+            c.fecha_comentario DESC
+    ";
+
+        $stmt = $conexion->prepare($query);
+
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $conexion->error);
+        }
+
+        $stmt->bind_param("i", $game_id);
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+
+        $comentarios = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $comentarios[] = $fila;
+        }
+
+        $stmt->close();
+        $conexion->close();
+
+        return $comentarios;
+    }
+
 }

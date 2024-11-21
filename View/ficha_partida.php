@@ -2,12 +2,16 @@
 require_once '../Resources/session_start.php';
 require_once '../Controller/PartidaController.php';
 require_once '../Controller/PartidaJugadorController.php';
+require_once '../Controller/ComentarioController.php';
 
 $controller = new PartidaController();
 $controllerJugador = new PartidaJugadorController();
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $partida = $controller->verPartida($id);
 $jugadoresPendientes = $controllerJugador->obtenerJugadoresPendientes($id);
+$controllerComentario = new ComentarioController();
+$comentarios = $controllerComentario->obtenerComentariosPorPartida($id);
+
 
 if (!$partida) {
     echo "<h1>No deberias estar viendo esto >:(</h1>";
@@ -153,13 +157,19 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                     <textarea name="comentario" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
                     <button type="submit" class="submit-comment-btn">Enviar comentario</button>
                 </form>
-                <div class="comment-card">
-                    <p class="comment-content">Este comentario esta soldado al código! </p>
-                    <div class="comment-footer">
-                        <span class="comment-author">Publicado por: Mapi</span>
-                        <span class="comment-date">Fecha: 21/11/2024</span>
-                    </div>
-                </div>
+                <?php if (!empty($comentarios)): ?>
+                    <?php foreach ($comentarios as $comentario): ?>
+                        <div class="comment-card">
+                            <p class="comment-content"><?php echo htmlspecialchars($comentario['texto']); ?></p>
+                            <div class="comment-footer">
+                                <span class="comment-author">Publicado por: <?php echo htmlspecialchars($comentario['nombre_usuario']); ?></span>
+                                <span class="comment-date">Fecha: <?php echo htmlspecialchars($comentario['fecha_comentario']); ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No hay comentarios para esta partida.</p>
+                <?php endif; ?>
             </div>
 
         <?php endif; ?>
