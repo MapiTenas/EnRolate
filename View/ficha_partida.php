@@ -147,7 +147,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
             )): ?>
             <h2>¡Unete a la conversación de la partida!</h2>
             <div class="comment-section">
-                <form action="../Controller/ComentariosController.php" method="post" class="comment-form">
+                <form action="../Controller/ComentarioController.php" method="post" class="comment-form">
                     <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id'] ?? ''); ?>">
                     <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
                     <textarea name="comentario" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
@@ -160,11 +160,6 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                         <span class="comment-date">Fecha: 21/11/2024</span>
                     </div>
                 </div>
-
-
-
-
-
             </div>
 
         <?php endif; ?>
