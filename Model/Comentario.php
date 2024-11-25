@@ -42,9 +42,11 @@ class Comentario {
 
         $query = "
         SELECT 
+            c.id,
             c.texto, 
             c.fecha_comentario, 
-            u.nombre_usuario 
+            u.nombre_usuario,
+            c.user_id
         FROM 
             comments c 
         INNER JOIN 
@@ -79,4 +81,13 @@ class Comentario {
         return $comentarios;
     }
 
+    public static function eliminarComentarioPorId($id) {
+        $conexion = getDbConnection();
+        $query = "DELETE FROM comments WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+        $conexion->close();
+    }
 }

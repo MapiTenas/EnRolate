@@ -32,8 +32,32 @@ class ComentarioController {
         return Comentario::obtenerComentariosPorPartida($game_id);
     }
 
+    public function eliminarComentario() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'eliminar') {
+            $comentario_id = $_POST['comentario_id'] ?? null;
+            $game_id = $_POST['game_id'] ?? null;
+            if ($comentario_id) {
+                Comentario::eliminarComentarioPorId($comentario_id);
+                $_SESSION['inscripcion_error'] = "Comentario eliminado exitosamente.";
+            } else {
+                $_SESSION['inscripcion_error'] = "No se pudo eliminar el comentario.";
+            }
+
+            header("Location: ../View/ficha_partida.php?id=" . $game_id);
+            exit;
+        }
+    }
+
 }
 
-// Ejecutar el método
 $controller = new ComentarioController();
-$controller->guardarComentario();
+$accion = $_POST['accion'] ?? '';
+
+switch ($accion) {
+    case 'guardar':
+        $controller->guardarComentario();
+        break;
+    case 'eliminar':
+        $controller->eliminarComentario();
+        break;
+    }

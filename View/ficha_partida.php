@@ -72,7 +72,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                     <h3>Tu solicitud está pendiente</h3>
                 <?php elseif ($estadoInscripcion === 'aceptado'): ?>
                     <!--<h3>Tu solicitud está aprobada</h3> -->
-                    <form action="../Controller/PartidaJugadorController.php" method="post", onsubmit="return confirmarAbandono();">
+                    <form action="../Controller/PartidaJugadorController.php" method="post" onsubmit="return confirmarAbandono();">
                         <input type="hidden" name="accion" value="abandonar">
                         <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
                         <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
@@ -152,6 +152,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
             <h2>¡Unete a la conversación de la partida!</h2>
             <div class="comment-section">
                 <form action="../Controller/ComentarioController.php" method="post" class="comment-form">
+                    <input type="hidden" name="accion" value="guardar">
                     <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_SESSION['user_id'] ?? ''); ?>">
                     <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
                     <textarea name="comentario" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
@@ -163,6 +164,17 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                             <p class="comment-content"><?php echo htmlspecialchars($comentario['texto']); ?></p>
                             <div class="comment-footer">
                                 <span class="comment-author">Publicado por: <?php echo htmlspecialchars($comentario['nombre_usuario']); ?></span>
+                                <?php if (
+                                    (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'moderador') ||
+                                    ($_SESSION['user_id'] == $comentario['user_id'])): ?>
+
+                                <form action="../Controller/ComentarioController.php" method="post" onsubmit="return confirmarBorradoComentario()" style="display:inline;">
+                                        <input type="hidden" name="accion" value="eliminar">
+                                        <input type="hidden" name="comentario_id" value="<?php echo htmlspecialchars($comentario['id']); ?>">
+                                        <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                                        <button type="submit" class="delete-comment-btn">Borrar</button>
+                                    </form>
+                                <?php endif; ?>
                                 <span class="comment-date">
                                     <?php echo date('d-m-Y', strtotime($comentario['fecha_comentario'])); ?>
                                     - <?php echo date('H:i', strtotime($comentario['fecha_comentario'])); ?>
@@ -202,6 +214,9 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
     });
     function confirmarAbandono() {
         return confirm("¿Estás seguro de que quieres abandonar esta partida?");
+    }
+    function confirmarBorradoComentario() {
+        return confirm("¿Estás seguro de que quieres borrar este comentario?");
     }
 </script>
 

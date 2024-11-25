@@ -567,4 +567,19 @@ button.refuse-player-btn img {
     display: inline-block;
 }
 
+.delete-comment-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-comment-btn:hover {
+    background-color: #c0392b;
+}
+
+
+
 
