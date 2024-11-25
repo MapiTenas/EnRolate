@@ -114,7 +114,16 @@ class PartidaController {
     public function listarPartidasAprobadas($limit, $offset, $filtroEdad = 'todas', $filtroFranja = 'todas') {
         return Partida::obtenerPartidasAprobadas($limit, $offset, $filtroEdad, $filtroFranja);
     }
+    public function borrarPartida() {
+        if (isset($_POST['accion']) && $_POST['accion'] == 'borrar' && isset($_POST['game_id'])) {
+            $id = (int)$_POST['game_id'];
 
+            Partida::eliminarPartidaPorId($id);
+
+            header('Location: ../View/index.php');
+            exit;
+        }
+    }
 
 
 }
@@ -131,6 +140,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
         case 'rechazar':
             $controller->rechazarPartida($id);
             break;
+        case 'borrar':
+            $controller->borrarPartida();
     }
 }
 

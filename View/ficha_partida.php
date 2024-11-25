@@ -141,6 +141,13 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                         </tbody>
                     </table>
                 <?php endif; ?>
+                <div class="buttons-moderacion">
+                    <form action="../Controller/PartidaController.php" method="post" onsubmit="return confirmarBorradoPartida();">
+                        <input type="hidden" name="accion" value="borrar">
+                        <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($partida['id']); ?>">
+                        <button type="submit" class="reject-button">Borrar partida </button>
+                    </form>
+                </div>
             </div>
         <?php endif; ?>
         <?php if ($partida['estado'] === 'aprobada' &&
@@ -217,6 +224,10 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
     }
     function confirmarBorradoComentario() {
         return confirm("¿Estás seguro de que quieres borrar este comentario?");
+    }
+
+    function confirmarBorradoPartida() {
+        return confirm("¿Estás seguro de que quieres borrar esta partida?");
     }
 </script>
 

@@ -223,6 +223,15 @@ class Partida {
         $conexion->close();
         return $total;
     }
+    public static function eliminarPartidaPorId($id) {
+        $conexion = getDbConnection();
+        $query = "DELETE FROM games WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+        $conexion->close();
+    }
     public function getId()
     {
         return $this->id;
