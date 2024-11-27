@@ -45,6 +45,10 @@ class UsuarioController {
         $usuario = new Usuario($id, null, null, null, null, null);
         return $usuario->degradarUsuario();
     }
+    public function obtenerUsuario($id) {
+        return Usuario::obtenerUsuarioPorId($id);
+    }
+
 }
 
 

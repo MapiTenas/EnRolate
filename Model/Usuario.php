@@ -87,6 +87,34 @@ class Usuario {
         return $total;
     }
 
+    public static function obtenerUsuarioPorId($id) {
+        $conexion = getDbConnection();
+        $query = "SELECT id, nombre_usuario, email, tipo_usuario, fecha_registro FROM users WHERE id = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($fila = $resultado->fetch_assoc()) {
+            $usuario = new Usuario(
+                $fila['id'],
+                $fila['nombre_usuario'],
+                $fila['email'],
+                '',
+                $fila['tipo_usuario'],
+                $fila['fecha_registro']
+            );
+            $stmt->close();
+            $conexion->close();
+            return $usuario;
+        } else {
+            $stmt->close();
+            $conexion->close();
+            return null; // Si no se encuentra el usuario
+        }
+    }
+
+
     public function getId()
     {
         return $this->id;

@@ -49,7 +49,11 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
             <div><strong>Edad recomendada:</strong> <?php echo htmlspecialchars($partida['edad']); ?></div>
             <div><strong>Horario:</strong> <?php echo htmlspecialchars($partida['franja_horaria']); ?></div>
             <div><strong>Plazas disponibles:</strong> <?php echo htmlspecialchars($partida['plazas_disponibles']); ?></div>
-            <div><strong>Director de juego:</strong> <?php echo htmlspecialchars($partida['director_nombre']); ?></div>
+            <div><strong>Director de juego:</strong>
+                <a href="perfil_usuario.php?user=<?php echo htmlspecialchars($partida['director_id']); ?>">
+                    <?php echo htmlspecialchars($partida['director_nombre']); ?>
+                </a>
+            </div>
         </div>
 
         <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador' && $partida['estado'] == 'pendiente'): ?>

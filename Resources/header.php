@@ -32,7 +32,9 @@
                 }  elseif ($_SESSION['tipo_usuario'] == 'director') {
                     echo '<a href="../View/formulario_nueva_partida.php">Envía tu partida</a>';
                 }
-                // El usuario ha iniciado sesión, mostramos el enlace de Cerrar sesión
+                // El usuario ha iniciado sesión, mostramos el enlace de Cerrar sesión y a su perfil.
+                $id_usuario = urlencode($_SESSION['user_id']);
+                echo '<a href="../View/perfil_usuario.php?user=' . $id_usuario . '">Ver tu perfil</a>';
                 echo '<a href="/Resources/logout.php">Cerrar sesión</a>';
         } else {
             // El usuario no ha iniciado sesión, mostramos los enlaces de Registrate y Crea una nueva cuenta
