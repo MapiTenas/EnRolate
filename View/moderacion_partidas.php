@@ -42,19 +42,27 @@ $totalPaginas = ceil($totalPartidasPendientes / $limit);
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($partidasPendientes as $partida): ?>
+            <?php if (!empty($partidasPendientes)): ?>
+                <?php foreach ($partidasPendientes as $partida): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($partida['titulo']); ?></td>
+                        <td><?php echo htmlspecialchars($partida['director_nombre']); ?></td>
+                        <td>
+                            <a href="ficha_partida.php?id=<?php echo $partida['id']; ?>">
+                                <img src="../Resources/lupa.png" alt="Ver ficha" style="width: 25px; height: 25px;">
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($partida['titulo']); ?></td>
-                    <td><?php echo htmlspecialchars($partida['director_nombre']); ?></td>
-                    <td>
-                        <a href="ficha_partida.php?id=<?php echo $partida['id']; ?>">
-                            <img src="../Resources/lupa.png" alt="Ver ficha" style="width: 25px; height: 25px;">
-                        </a>
-                    </td>
+                    <td colspan="3">No hay partidas pendientes para moderar.</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
+
         </table>
+        <br>
         <!-- Navegación de paginación -->
         <div class="pagination">
             <?php if ($page > 1): ?>
