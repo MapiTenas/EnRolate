@@ -232,6 +232,39 @@ class Partida {
         $stmt->close();
         $conexion->close();
     }
+
+    public static function obtenerPartidasPorUsuario($userId) {
+        $conexion = getDbConnection();
+
+        $query = "
+        SELECT 
+            g.*,
+            gp.estado AS estado_inscripcion
+        FROM 
+            games g
+        JOIN 
+            game_players gp 
+        ON 
+            g.id = gp.game_id
+        WHERE 
+            gp.user_id = ?
+    ";
+
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        $partidas = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $partidas[] = $fila;
+        }
+
+        $stmt->close();
+        $conexion->close();
+
+        return $partidas;
+    }
     public function getId()
     {
         return $this->id;

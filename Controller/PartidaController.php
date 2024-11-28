@@ -125,6 +125,10 @@ class PartidaController {
         }
     }
 
+    public function obtenerPartidasPorUsuario($userId) {
+        return Partida::obtenerPartidasPorUsuario($userId);
+    }
+
 
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
