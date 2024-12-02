@@ -17,6 +17,7 @@ if ($usuario) {
 }
 // Recuperar las partidas asociadas al usuario
 $partidas = $partidaController->obtenerPartidasPorUsuario($idUsuario);
+$partidasDirector = $partidaController->obtenerPartidasPorDirector($idUsuario);
 ?>
 
 <!DOCTYPE html>
@@ -69,11 +70,41 @@ $partidas = $partidaController->obtenerPartidasPorUsuario($idUsuario);
     <br>
     <br>
 
-
-
-
 <?php elseif ($usuario->getTipoUsuario() === 'director'): ?>
     <h2>Podrás encontrar a <?php echo htmlspecialchars($nombreUsuario); ?> dirigiendo:</h2>
+    <br>
+    <div class="list-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Franja horaria</th>
+                <th>Ver partida</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if (!empty($partidasDirector)): ?>
+                <?php foreach ($partidasDirector as $partida): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($partida['titulo']); ?></td>
+                        <td><?php echo htmlspecialchars($partida['franja_horaria']); ?></td>
+                        <td>
+                            <a href="ficha_partida.php?id=<?php echo htmlspecialchars($partida['id']); ?>">
+                                <img src="../Resources/lupa.png" alt="Ver ficha" style="width: 25px; height: 25px;">
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="4">No se encontraron partidas para este usuario.</td>
+                </tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
 <?php else: ?>
     <h2>Este usuario es un moderador, aqui no hay nada que ver</h2>
 <?php endif; ?>

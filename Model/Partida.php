@@ -236,19 +236,11 @@ class Partida {
     public static function obtenerPartidasPorUsuario($userId) {
         $conexion = getDbConnection();
 
-        $query = "
-        SELECT 
-            g.*,
-            gp.estado AS estado_inscripcion
-        FROM 
-            games g
-        JOIN 
-            game_players gp 
-        ON 
-            g.id = gp.game_id
-        WHERE 
-            gp.user_id = ?
-    ";
+        $query = "SELECT g.*, gp.estado AS estado_inscripcion
+        FROM games g
+        JOIN game_players gp 
+        ON g.id = gp.game_id
+        WHERE gp.user_id = ?";
 
         $stmt = $conexion->prepare($query);
         $stmt->bind_param("i", $userId);
@@ -264,6 +256,27 @@ class Partida {
         $conexion->close();
 
         return $partidas;
+    }
+
+    public static function obtenerPartidasDeDirector($userId){
+        $conexion = getDbConnection();
+
+        $query = "SELECT * FROM games WHERE director_id = ? AND estado = 'aprobada';";
+
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        $partidasDirector = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $partidasDirector[] = $fila;
+        }
+
+        $stmt->close();
+        $conexion->close();
+
+        return $partidasDirector;
     }
     public function getId()
     {
