@@ -14,9 +14,8 @@ $comentarios = $controllerComentario->obtenerComentariosPorPartida($id);
 
 
 if (!$partida) {
-    echo "<h1>No deberias estar viendo esto >:(</h1>";
+    header("Location: pagina_error.php");
     exit;
-    //Todo: Estaria bien hacer un header() a alguna página de error custom un poco mas elegante??
 }
 
 $estadoInscripcion = null;

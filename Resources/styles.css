@@ -580,6 +580,18 @@ button.refuse-player-btn img {
     background-color: #c0392b;
 }
 
+/*Página error*/
+.error-container {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 
+}
+
+.error-image {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto; 
+}
 
 

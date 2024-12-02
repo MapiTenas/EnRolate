@@ -13,7 +13,8 @@ $usuario = $controller->obtenerUsuario($idUsuario);
 if ($usuario) {
     $nombreUsuario = $usuario->getNombreUsuario();
 } else {
-    $nombreUsuario = "Usuario no encontrado";
+    header("Location: pagina_error.php");
+    exit;
 }
 // Recuperar las partidas asociadas al usuario
 $partidas = $partidaController->obtenerPartidasPorUsuario($idUsuario);
@@ -106,7 +107,10 @@ $partidasDirector = $partidaController->obtenerPartidasPorDirector($idUsuario);
     <br>
     <br>
 <?php else: ?>
-    <h2>Este usuario es un moderador, aqui no hay nada que ver</h2>
+    <?php
+    header("Location: pagina_error.php");
+    exit;
+    ?>
 <?php endif; ?>
 <br>
 <br>
