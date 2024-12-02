@@ -174,7 +174,12 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                         <div class="comment-card">
                             <p class="comment-content"><?php echo htmlspecialchars($comentario['texto']); ?></p>
                             <div class="comment-footer">
-                                <span class="comment-author">Publicado por: <?php echo htmlspecialchars($comentario['nombre_usuario']); ?></span>
+                                <span class="comment-author">
+                                    Publicado por:
+                                    <a href="perfil_usuario.php?user=<?php echo htmlspecialchars($comentario['user_id']); ?>">
+                                        <?php echo htmlspecialchars($comentario['nombre_usuario']); ?>
+                                    </a>
+                                </span>
                                 <?php if (
                                     (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'moderador') ||
                                     ($_SESSION['user_id'] == $comentario['user_id'])): ?>
