@@ -152,6 +152,38 @@ class PartidaJugador {
         return $resultado;
     }
 
+    public static function jugadoresEnPartida($game_id) {
+        $conexion = getDbConnection();
+        $query = "
+        SELECT 
+            u.id, u.nombre_usuario 
+        FROM 
+            game_players gp
+        JOIN 
+            users u 
+        ON 
+            gp.user_id = u.id
+        WHERE 
+            gp.game_id = ? 
+            AND gp.estado = 'aceptado';
+    ";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("i", $game_id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        $jugadores = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $jugadores[] = [
+                'id' => $fila['id'],
+                'nombre_usuario' => $fila['nombre_usuario'],
+            ];
+        }
+
+        $stmt->close();
+        $conexion->close();
+        return $jugadores;
+    }
 
 
 

@@ -116,6 +116,9 @@ class PartidaJugadorController {
         exit();
 
     }
+    public function obtenerJugadoresAceptados($game_id) {
+        return PartidaJugador::jugadoresEnPartida($game_id);
+    }
 
 }
 

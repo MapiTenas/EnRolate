@@ -3,6 +3,7 @@ require_once '../Resources/session_start.php';
 require_once '../Controller/PartidaController.php';
 require_once '../Controller/PartidaJugadorController.php';
 require_once '../Controller/ComentarioController.php';
+require_once '../Controller/UsuarioController.php';
 
 $controller = new PartidaController();
 $controllerJugador = new PartidaJugadorController();
@@ -11,8 +12,7 @@ $partida = $controller->verPartida($id);
 $jugadoresPendientes = $controllerJugador->obtenerJugadoresPendientes($id);
 $controllerComentario = new ComentarioController();
 $comentarios = $controllerComentario->obtenerComentariosPorPartida($id);
-
-
+$jugadoresAceptados = $controllerJugador->obtenerJugadoresAceptados($id);
 if (!$partida) {
     header("Location: pagina_error.php");
     exit;
@@ -160,6 +160,19 @@ if (isset($_SESSION['user_id']) && $_SESSION['tipo_usuario'] == 'jugador') {
                 ($estadoInscripcion === 'aceptado')
             )): ?>
             <h2>¡Unete a la conversación de la partida!</h2>
+            <h4>Tus compañeros son:
+                <?php if (!empty($jugadoresAceptados)): ?>
+                    <?php
+                    $links = [];
+                    foreach ($jugadoresAceptados as $jugador) {
+                        $links[] = '<a href="perfil_usuario.php?user=' . htmlspecialchars($jugador['id']) . '">' . htmlspecialchars($jugador['nombre_usuario']) . '</a>';
+                    }
+                    echo implode(', ', $links);
+                    ?>
+                <?php else: ?>
+                    No tienes compañeros aceptados en esta partida.
+                <?php endif; ?>
+            </h4>
             <div class="comment-section">
                 <form action="../Controller/ComentarioController.php" method="post" class="comment-form">
                     <input type="hidden" name="accion" value="guardar">
