@@ -6,6 +6,11 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 10;
 $offset = ($page - 1) * $limit;
 
+if (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] != 'moderador') {
+    header("Location: pagina_error.php");
+    exit;
+}
+
 $partidasPendientes = $controller->listarPartidasPendientes($limit, $offset);
 $totalPartidasPendientes = Partida::contarPartidasPendientes();
 $totalPaginas = ceil($totalPartidasPendientes / $limit);

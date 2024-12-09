@@ -26,9 +26,6 @@ $totalPaginas = ceil($totalPartidasAprobadas / $limit);
 <?php
 if (isset($_SESSION['nombre_usuario'])){
     echo '<h1>Bienvenido, ' . $_SESSION['nombre_usuario'] . '</h1>';
-    if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'moderador') {
-        echo '<h2>Como eres moderador, puedes ver esto.</h2>';
-    }
 }
 ?>
 <form method="GET" action="" class="dropdown-index">

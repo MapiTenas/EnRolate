@@ -2,6 +2,11 @@
 include '../Resources/session_start.php';
 require_once '../Controller/PartidaController.php';
 
+if (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] != 'director') {
+    header("Location: pagina_error.php");
+    exit;
+}
+
 $partidaController = new PartidaController();
 $partidaController->crearPartida();
 ?>
