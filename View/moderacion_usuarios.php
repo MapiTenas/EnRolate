@@ -1,5 +1,6 @@
 <?php
 require_once '../Controller/UsuarioController.php';
+session_start();
 
 $controller = new UsuarioController();
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
